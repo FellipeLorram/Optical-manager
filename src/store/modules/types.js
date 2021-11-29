@@ -1,0 +1,12 @@
+export const LOGIN_SUCESS = 'LOGIN_SUCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+
+export const ADMIN_SUCESS = 'ADMIN_SUCESS';
+export const ADMIN_FAILURE = 'ADMIN_FAILURE';
+export const ADMIN_REQUEST = 'ADMIN_REQUEST';
+
+export const LEVEL_SUCESS = 'LEVEL_SUCESS';
+export const LEVEL_REQUEST = 'LEVEL_REQUEST';
+
+export const PERSIST_REHYDRATE = 'persist/REHYDRATE';
