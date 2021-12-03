@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import CurrencyFormat from 'react-currency-format';
 import { InfoContainer } from './styled';
+import history from '../../../services/history';
 
 const variants = {
   initial: {
@@ -21,13 +22,17 @@ const variants = {
   },
 };
 
-export default function LastSell({ data }) {
+export default function LastSell({ data, ClientId }) {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const Data = new Date(data.CriadoEm).toLocaleDateString('pt-BR', options);
+  const handleClick = () => {
+    history.push(`/edit-sell/${ClientId}/${data._id}`);
+  };
   return (
     <>
       {data && (
         <InfoContainer
+          onClick={handleClick}
           variants={variants}
           animate="animate"
           initial="initial"
@@ -61,5 +66,6 @@ export default function LastSell({ data }) {
 }
 
 LastSell.propTypes = {
+  ClientId: PropTypes.string.isRequired,
   data: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
 };

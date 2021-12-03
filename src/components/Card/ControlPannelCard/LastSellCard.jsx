@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CurrencyFormat from 'react-currency-format';
 import { Container } from './styled';
+import history from '../../../services/history';
 
 const cardVariants = {
   initial: {
@@ -19,6 +20,7 @@ const cardVariants = {
 export default function LastSellCard({ data }) {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const content = {
+    id: data._id,
     nome: data.nome,
     data: new Date(data.sell.CriadoEm).toLocaleDateString('pt-BR', options),
     armacao: data.sell.armacao || 'N/A',
@@ -28,12 +30,14 @@ export default function LastSellCard({ data }) {
     total: data.sell.total || '0,00',
     pago: data.sell.pago.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) || '0,00',
     resta: data.sell.resta.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) || '0,00',
+    sellId: data.sell._id,
   };
   return (
     <Container
       variants={cardVariants}
       initial="initial"
       animate="animate"
+      onClick={() => history.push(`/edit-sell/${content.id}/${content.sellId}`)}
     >
       <div className="content">
         <span>{content.nome}</span>

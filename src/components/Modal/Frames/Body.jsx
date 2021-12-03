@@ -24,7 +24,7 @@ export default function Body({
 
   const handleFrameClick = (name, price) => {
     setFrame(name);
-    setValueFrame(price);
+    setValueFrame(Number(price));
     setOnScreen(false);
   };
 
@@ -53,7 +53,7 @@ export default function Body({
             </Choice>
           </CurrentContentContainer>
           {mensframesOnScreen && (
-            <ContainerGrid gap=".5rem" noP>
+            <ContainerGrid overflowY gap=".5rem" noP>
               {mensframes.length > 0 ? (
                 <>
                   {
@@ -79,7 +79,7 @@ export default function Body({
 
           )}
           {WomensframesOnScreen && (
-            <ContainerGrid gap=".5rem" noP>
+            <ContainerGrid overflowY gap=".5rem" noP>
               {womensframes.length > 0 ? (
                 <>
                   {

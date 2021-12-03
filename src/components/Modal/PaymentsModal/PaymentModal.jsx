@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Background, Container } from '../styled';
 import Header from '../Header';
 import axios from '../../../services/axios';
+import Body from './Body';
 
 const BgVariants = {
   initial: {
@@ -31,7 +32,13 @@ const ContainerVariants = {
 };
 
 export default function PaymentModal({
-  onScreen, setOnScreen,
+  onScreen,
+  setOnScreen,
+  sellId,
+  clientId,
+  total,
+  resta,
+  setPayments,
 }) {
   return (
     <>
@@ -47,6 +54,14 @@ export default function PaymentModal({
             variants={ContainerVariants}
           >
             <Header setOnScreen={setOnScreen} />
+            <Body
+              total={total}
+              remains={resta}
+              setOnScreen={setOnScreen}
+              sellId={sellId}
+              clientId={clientId}
+              setPayments={setPayments}
+            />
           </Container>
         </Background>
       )}
@@ -54,7 +69,19 @@ export default function PaymentModal({
   );
 }
 
+PaymentModal.defaultProps = {
+  sellId: '',
+  clientId: '',
+  total: 0,
+  resta: 0,
+};
+
 PaymentModal.propTypes = {
+  total: PropTypes.number,
+  resta: PropTypes.number,
+  clientId: PropTypes.string,
+  sellId: PropTypes.string,
   onScreen: PropTypes.bool.isRequired,
   setOnScreen: PropTypes.func.isRequired,
+  setPayments: PropTypes.func.isRequired,
 };

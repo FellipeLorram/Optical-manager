@@ -81,7 +81,7 @@ export default function Multifocals({ onScreen, setLen, setOnScreen }) {
         </CurrentContentContainer>
       )}
       {resinaOnScreen && onScreen && (
-        <ContainerGrid noP gap=".5rem">
+        <ContainerGrid noP overflowY gap=".5rem">
           {Lens.multResina.map((len) => (
             <Lenses onClick={() => handleClickLen(len)} key={len}>
               {len}

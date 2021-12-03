@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { BodyContainer } from '../styled';
-import Alert from '../../Svgs/Alert/Alert';
+import { BodyContainer } from './styled';
+import Alert from '../Svgs/Alert/Alert';
 
-export default function Body() {
+export default function DeleteBody({ text }) {
   return (
     <BodyContainer>
       <div
@@ -12,10 +12,13 @@ export default function Body() {
       >
         <Alert />
         <span>
-          AO DELETAR ESSE EXAME,
-          VOCÊ PERDERÁ TODO OS SEUS DADOS.
+          {text}
         </span>
       </div>
     </BodyContainer>
   );
 }
+
+DeleteBody.propTypes = {
+  text: PropTypes.string.isRequired,
+};

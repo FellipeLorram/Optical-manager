@@ -42,7 +42,7 @@ export default function Body({
           </Choice>
         </CurrentContentContainer>
         {onScreen && contactLensOnScreen && (
-          <ContainerGrid noP gap=".5rem">
+          <ContainerGrid overflowY noP gap=".5rem">
             {ContactLenses.map((contact) => (
               <ContactLens
                 onClick={() => handleClickContactLenses(contact)}

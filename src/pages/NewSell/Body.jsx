@@ -12,14 +12,20 @@ import Frames from '../../components/Modal/Frames/FramesModal';
 import Lens from '../../components/Modal/Lens/LensModal';
 import ContactLenses from '../../components/Modal/ContactLenses/ContactLensModal';
 import Payments from './Payments';
+import ButtonHandle from './ButtonsHandle';
+import { FormatDate, save } from './fuctions';
+import PaymentModal from '../../components/Modal/PaymentsModal/PaymentModal';
 
-export default function Body({ id }) {
+export default function Body({ id, sellid }) {
+  const [sellId, setSellId] = useState(sellid);
   const [payments, setPayments] = useState([]);
   const [lastExamData, setLastExamData] = useState('');
   const [ModalFramesOnScreen, setModalFramesOnScreen] = useState(false);
   const [ModalLensOnScreen, setModalLensOnScreen] = useState(false);
   const [ModalContactLensOnScreen, setModalContactLensOnScreen] = useState(false);
+  const [ModalAddPaymentsOnScreen, setModalAddPaymentsOnScreen] = useState(false);
 
+  const [sellOs, setSellOs] = useState('');
   const [sellDate, setSellDate] = useState('');
   const [inputBlock, setInputBlock] = useState(false);
 
@@ -67,19 +73,58 @@ export default function Body({ id }) {
   const [valorPago, setValorPago] = useState('');
   const [resta, setResta] = useState('');
   const [pago, setPago] = useState('');
-  const [entregue, setEntregue] = useState('');
+  const [entregue, setEntregue] = useState('Não entregue');
 
   useEffect(() => {
     async function getLastExamData() {
       try {
-        const response = await axios.get(`/clients/${id}/lastexam`);
-        setLastExamData(response.data);
+        const examResponse = await axios.get(`/clients/${id}/lastexam`);
+        setLastExamData(examResponse.data);
+
+        if (sellId) {
+          const sellResponse = await axios.get(`/clients/${id}/sells/${sellId}`);
+          const paymentsResponse = await axios.get(`/clients/payments/${id}/${sellId}`);
+
+          setPayments(paymentsResponse.data);
+
+          const sell = sellResponse.data[0];
+          const odSign = sell.esfOd[0];
+          const oeSign = sell.esfOe[0];
+
+          setEsfOdSign(odSign);
+          setEsfOeSign(oeSign);
+          setSellDate(FormatDate(sell.CriadoEm));
+
+          setEsfOd(sell.esfOd.substring(1));
+          setCilOd(sell.cilOd.substring(1));
+          setEixoOd(sell.eixoOd);
+          setEsfOe(sell.esfOe.substring(1));
+          setCilOe(sell.cilOe.substring(1));
+          setEixoOe(sell.eixoOe);
+
+          setAdicao(sell.adicao);
+          setAlturaOd(sell.alturaOd);
+          setAlturaOe(sell.alturaOe);
+          setDnpOd(sell.dnpOd);
+          setDnpOe(sell.dnpOe);
+          setArmacao(sell.armacao);
+          setLente(sell.lente);
+          setValorArm(sell.valorArm);
+          setValorLen(sell.valorLen);
+          setLenteContato(sell.lenteContato);
+          setValorLenContato(sell.valorLenContato);
+          setTotal(sell.total);
+          setPago(sell.pago);
+          setSellOs(sell.os);
+
+          setInputBlock(true);
+        }
       } catch (error) {
         setLastExamData('');
       }
     }
     getLastExamData();
-  }, [id]);
+  }, [id, sellId]);
 
   useEffect(() => {
     if (Number(valorLen) < 0) setValorLen(Number(valorLen) * Number(valorLen));
@@ -95,6 +140,22 @@ export default function Body({ id }) {
     } else if (total) setValorDaCompra(Number(total));
   }, [desconto, total]);
 
+  useEffect(() => {
+    if (payments.length < 1) {
+      setResta(valorDaCompra);
+      return;
+    }
+
+    let paidValue = 0;
+
+    payments.forEach((payment) => {
+      paidValue += Number(payment.value);
+    });
+
+    setValorPago(paidValue);
+    setResta(Number(valorDaCompra) - Number(paidValue));
+  }, [payments, valorDaCompra]);
+
   const handleLastExamClick = () => {
     if (!lastExamData) return;
 
@@ -109,6 +170,89 @@ export default function Body({ id }) {
     setEixoOe(lastExamData.rxEixoOe);
 
     setAdicao(lastExamData.rxAdd);
+  };
+
+  const handleAddSaveClick = () => {
+    async function request() {
+      try {
+        const responseId = await save(id, {
+          os: Math.floor(Math.random() * (2000 - 1)) + 1,
+          esfOd: `${EsfOdSign}${esfOd}`,
+          cilOd: `-${cilOd}`,
+          eixoOd,
+
+          esfOe: `${EsfOeSign}${esfOe}`,
+          cilOe: `-${cilOe}`,
+          eixoOe,
+
+          adicao,
+
+          dnpOd,
+          alturaOd,
+          dnpOe,
+          alturaOe,
+
+          armacao,
+          valorArm,
+          lente,
+          valorLen,
+          lenteContato,
+          valorLenContato,
+          total,
+          resta,
+          pago,
+          entregue,
+        });
+        setSellId(responseId);
+        history.push(`/edit-sell/${id}/${sellId}`);
+      } catch (error) {
+        return 1;
+      }
+      return 0;
+    }
+    request();
+  };
+
+  const handleAddPaymentClick = () => {
+    async function request() {
+      try {
+        if (!sellId) {
+          const responseId = await save(id, {
+            esfOd: `${EsfOdSign}${esfOd}`,
+            cilOd: `-${cilOd}`,
+            eixoOd,
+
+            esfOe: `${EsfOeSign}${esfOe}`,
+            cilOe: `-${cilOe}`,
+            eixoOe,
+
+            adicao,
+
+            dnpOd,
+            alturaOd,
+            dnpOe,
+            alturaOe,
+
+            armacao,
+            valorArm,
+            lente,
+            valorLen,
+            lenteContato,
+            valorLenContato,
+            total,
+            resta,
+            pago,
+            entregue,
+          });
+          setSellId(responseId);
+        }
+        setModalAddPaymentsOnScreen(true);
+      } catch (error) {
+        return 1;
+      }
+      return 0;
+    }
+    request();
   };
 
   return (
@@ -130,6 +274,25 @@ export default function Body({ id }) {
         onScreen={ModalContactLensOnScreen}
         setOnScreen={setModalContactLensOnScreen}
       />
+      <PaymentModal
+        onScreen={ModalAddPaymentsOnScreen}
+        setOnScreen={setModalAddPaymentsOnScreen}
+        total={Number(total)}
+        resta={Number(resta)}
+        clientId={id}
+        sellId={sellId}
+        setPayments={setPayments}
+      />
+      {sellDate && (
+        <>
+          <div className="title">
+            {`Venda dia: ${sellDate}`}
+          </div>
+          <div className="title">
+            {`OS: ${sellOs}`}
+          </div>
+        </>
+      )}
       <div className="title">
         EXAME
       </div>
@@ -152,7 +315,7 @@ export default function Body({ id }) {
       <div className="input--container">
         <Input inputBlock={inputBlock} label="ADIÇÃO" valid={isValidAdicao} setValidText={setIsValidAdicao} setText={setAdicao} text={adicao} type="number" />
       </div>
-      {lastExamData && (
+      {lastExamData && !sellId && (
         <div className="container-start">
           <Button onClick={handleLastExamClick}>UTILIZAR DADOS DA ULTIMA CONSULTA</Button>
         </div>
@@ -182,7 +345,8 @@ export default function Body({ id }) {
       </div>
       <div className="input--container">
         <SelectModal
-          onClick={() => setModalFramesOnScreen(true)}
+          block={inputBlock}
+          onClick={() => !inputBlock && setModalFramesOnScreen(true)}
         >
           <span>ARMAÇÃO:</span>
           <span className="frame">{armacao}</span>
@@ -194,7 +358,8 @@ export default function Body({ id }) {
       </div>
       <div className="input--container">
         <SelectModal
-          onClick={() => setModalLensOnScreen(true)}
+          block={inputBlock}
+          onClick={() => !inputBlock && setModalLensOnScreen(true)}
         >
           <span>LENTE:</span>
           <span className="frame">{lente}</span>
@@ -206,7 +371,8 @@ export default function Body({ id }) {
       </div>
       <div className="input--container">
         <SelectModal
-          onClick={() => setModalContactLensOnScreen(true)}
+          block={inputBlock}
+          onClick={() => !inputBlock && setModalContactLensOnScreen(true)}
         >
           <span>LENTE DE CONTATO:</span>
           <span className="frame">{lenteContato}</span>
@@ -223,20 +389,29 @@ export default function Body({ id }) {
       </div>
       <Payments
         payments={payments}
-        remains={resta}
-        purchaseAmount={valorDaCompra}
-        amountPaid={valorPago}
+        remains={Number(resta)}
+        purchaseAmount={Number(valorDaCompra)}
+        amountPaid={Number(valorPago)}
+        handleAddPaymentClick={handleAddPaymentClick}
       />
       <div className="container-start">
         <Button>GERAR PDF</Button>
       </div>
-      <div className="container-end">
-        <Button>SALVAR</Button>
-      </div>
+      <ButtonHandle
+        inputBlock={inputBlock}
+        setInputBlock={setInputBlock}
+        sellId={sellId}
+        handleAddSaveClick={handleAddSaveClick}
+      />
     </BodyContainer>
   );
 }
 
+Body.defaultProps = {
+  sellid: '',
+};
+
 Body.propTypes = {
   id: PropTypes.string.isRequired,
+  sellid: PropTypes.string,
 };

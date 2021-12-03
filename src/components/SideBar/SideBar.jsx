@@ -54,6 +54,7 @@ export default function SideBar() {
   }, [level, widthScreen]);
 
   const handleMenuClick = () => {
+    if (widthScreen < 1068) return;
     setMenuOpen(!menuOpen);
   };
 

@@ -17,6 +17,8 @@ import IsLoading from '../../components/Loader/IsLoading';
 import Logo from '../../components/Svgs/Logo';
 
 export default function Login(props) {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   const [isValidEmail, setisValidEmail] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -34,6 +36,9 @@ export default function Login(props) {
     }
     if (formErros) return;
     dispatch(actions.loginRequest({ email, password, prevPath }));
+    if (!isLoggedIn) {
+      setisValidEmail(false);
+    }
   };
 
   return (

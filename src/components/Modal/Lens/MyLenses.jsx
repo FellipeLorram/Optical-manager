@@ -62,7 +62,7 @@ export default function MyLenses({
         </CurrentContentContainer>
       )}
       {onScreen && multOnScreen && (
-        <ContainerGrid noP gap=".5rem">
+        <ContainerGrid noP overflowY gap=".5rem">
           {myMultfocalslenses.map((lens) => (
             <Lenses onClick={() => handleClickLen(lens.name, lens.price)} key={lens._id}>
               {lens.name}
@@ -71,7 +71,7 @@ export default function MyLenses({
         </ContainerGrid>
       )}
       {onScreen && vsOnScreen && (
-        <ContainerGrid noP gap=".5rem">
+        <ContainerGrid noP overflowY gap=".5rem">
           {mySimpleVisionlenses.map((lens) => (
             <Lenses onClick={() => handleClickLen(lens.name, lens.price)} key={lens._id}>
               {lens.name}

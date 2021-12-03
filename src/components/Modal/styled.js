@@ -15,14 +15,19 @@ export const Background = styled(motion.div)`
 `;
 
 export const Container = styled(motion.div)`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
   background: var(--card-color);
   border-radius: 12px;
   width: ${(props) => props.Lg ? '800px' : '400px'};
   max-width: 90%;
+  max-height: 95%;
+  overflow-y: hidden;
+
+  @media screen and (max-width: 768px){
+  }
+
 `;
 
 export const HeaderContainer = styled.div`
@@ -79,7 +84,7 @@ export const BodyContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    gap: 1rem;
+    gap: ${(props) => props.gap ? props.gap : '1rem'};
     width: 100%;
   }
 
@@ -116,6 +121,12 @@ export const CurrentContentContainer = styled.div`
   gap: 1.5rem;
   border-bottom: 1px solid rgba(228,228,228,0.1);
   padding: 1rem;
+
+  @media screen and (max-width: 768px){
+    gap: 1rem;
+    padding: .5rem;
+    flex-wrap: wrap;
+  }
 `;
 
 export const Choice = styled.span`
@@ -139,5 +150,16 @@ export const OtherOptionContainer = styled.div`
   }
   .btn--container{
     width: 20%;
+  }
+  @media screen and (max-width: 768px){
+    flex-direction: column;
+
+    .input--container{
+    width: 100%;
+  }
+  .btn--container{
+    width: 100%;
+    text-align: right;
+  }
   }
 `;

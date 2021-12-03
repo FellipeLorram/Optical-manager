@@ -81,7 +81,7 @@ export default function SimpleVision({ onScreen, setLen, setOnScreen }) {
         </CurrentContentContainer>
       )}
       {resinaOnScreen && onScreen && (
-        <ContainerGrid noP gap=".5rem">
+        <ContainerGrid noP overflowY gap=".5rem">
           {Lens.resina.map((len) => (
             <Lenses onClick={() => handleClickLen(len)} key={len}>
               {len}
@@ -90,7 +90,7 @@ export default function SimpleVision({ onScreen, setLen, setOnScreen }) {
         </ContainerGrid>
       )}
       {resina161OnScreen && onScreen && (
-        <ContainerGrid noP gap=".5rem">
+        <ContainerGrid noP overflowY gap=".5rem">
           {Lens.resina161.map((len) => (
             <Lenses onClick={() => handleClickLen(len)} key={len}>
               {len}
@@ -99,7 +99,7 @@ export default function SimpleVision({ onScreen, setLen, setOnScreen }) {
         </ContainerGrid>
       )}
       {resina167OnScreen && onScreen && (
-        <ContainerGrid noP gap=".5rem">
+        <ContainerGrid noP overflowY gap=".5rem">
           {Lens.resina167.map((len) => (
             <Lenses onClick={() => handleClickLen(len)} key={len}>
               {len}
@@ -108,7 +108,7 @@ export default function SimpleVision({ onScreen, setLen, setOnScreen }) {
         </ContainerGrid>
       )}
       {resina170OnScreen && onScreen && (
-        <ContainerGrid noP gap=".5rem">
+        <ContainerGrid noP overflowY gap=".5rem">
           {Lens.resina170.map((len) => (
             <Lenses onClick={() => handleClickLen(len)} key={len}>
               {len}
@@ -117,7 +117,7 @@ export default function SimpleVision({ onScreen, setLen, setOnScreen }) {
         </ContainerGrid>
       )}
       {poliOnScreen && onScreen && (
-        <ContainerGrid noP gap=".5rem">
+        <ContainerGrid noP overflowY gap=".5rem">
           {Lens.policarbonato.map((len) => (
             <Lenses onClick={() => handleClickLen(len)} key={len}>
               {len}

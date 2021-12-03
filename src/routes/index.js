@@ -36,6 +36,7 @@ export default function Routes() {
             <MyRoute exact path="/clients" component={Clients} isClosed />
             <MyRoute exact path="/new-client" component={Client} isClosed />
             <MyRoute exact path="/new-sell" component={ClientChoose} isClosed />
+            <MyRoute exact path="/edit-sell/:id/:sellid" component={NewSell} isClosed />
             <MyRoute exact path="/new-exam" component={ClientChoose} isClosed />
             <MyRoute exact path="/new-exam/:id" component={NewExam} isClosed />
             <MyRoute exact path="/edit-exam/:id/:examid" component={NewExam} isClosed />

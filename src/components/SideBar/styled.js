@@ -54,6 +54,14 @@ export const Container = styled.div`
     overflow-x: hidden;
   }
 
+  @media screen and (max-width:1068px) {
+    width: 94px;
+    justify-content: center;
+    .header{
+      display: none;
+    }
+  }
+
   @media screen and (max-width:768px) {
     position: fixed;
     z-index: 2000;

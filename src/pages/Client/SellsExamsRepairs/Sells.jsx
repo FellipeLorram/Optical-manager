@@ -20,18 +20,19 @@ const variants = {
   },
 };
 
-export default function Sells({ sells, data }) {
+export default function Sells({ sells, data, id }) {
   return (
     <>
       {sells && (
         <ContainerGrid
+          overflowY
           variants={variants}
           initial="initial"
           animate="animate"
           exit="exit"
         >
           {data.map((sell) => (
-            <LastSell key={sell._id} data={sell} />
+            <LastSell ClientId={id} key={sell._id} data={sell} />
           ))}
         </ContainerGrid>
       )}
@@ -40,6 +41,7 @@ export default function Sells({ sells, data }) {
 }
 
 Sells.propTypes = {
+  id: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   sells: PropTypes.bool.isRequired,
 };

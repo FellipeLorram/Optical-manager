@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import CurrencyFormat from 'react-currency-format';
 
-import { PaymentsContainer } from './styled';
+import { Payment, PaymentsContainer } from './styled';
 import { Button } from '../../styles/GlobalStyles';
 
 export default function Payments({
@@ -9,27 +10,37 @@ export default function Payments({
   remains,
   purchaseAmount,
   amountPaid,
+  handleAddPaymentClick,
 }) {
+  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  const FormatDate = (date) => new Date(date).toLocaleDateString('pt-BR', options);
+
   return (
     <PaymentsContainer>
       <div className="payment-container-header">PAGAMENTOS</div>
       {payments.length > 0 ? (
         <div className="payment-container-grid">
           {payments.map((payment) => (
-            <div className="payment">
+            <Payment>
               <div className="payment-row">
+                <span className="payment-row-text">Pago no:</span>
                 <span>{payment.type}</span>
-                <span>{payment.value}</span>
               </div>
               <div className="payment-row">
-                <span>Recebido em:</span>
-                <span>{payment.PaidIn}</span>
+                <span className="payment-row-text">Valor:</span>
+                <span>
+                  <CurrencyFormat value={payment.value} displayType="text" thousandSeparator prefix="R$" />
+                </span>
               </div>
               <div className="payment-row">
-                <span>Por:</span>
-                <span>{payment.PaidIn}</span>
+                <span className="payment-row-text">Recebido em:</span>
+                <span>{FormatDate(payment.PaidIn)}</span>
               </div>
-            </div>
+              <div className="payment-row">
+                <span className="payment-row-text">Por:</span>
+                <span>{payment.receiveBy}</span>
+              </div>
+            </Payment>
           ))}
         </div>
       )
@@ -39,24 +50,35 @@ export default function Payments({
           </div>
         )}
       <div className="payment-container-footer">
-        <span>{`Total: ${purchaseAmount || 'R$0,00'}`}</span>
-        <span>{`Pago: ${amountPaid || 'R$0,00'}`}</span>
-        <span>{`Resta: ${remains || 'R$0,00'}`}</span>
-        <Button>ADICIONAR PAGAMENTO</Button>
+        <span>
+          {'Total: '}
+          <CurrencyFormat value={purchaseAmount} displayType="text" thousandSeparator prefix="R$" />
+        </span>
+        <span>
+          {'Pago: '}
+          <CurrencyFormat value={amountPaid} displayType="text" thousandSeparator prefix="R$" />
+
+        </span>
+        <span>
+          {'Resta: '}
+          <CurrencyFormat value={remains} displayType="text" thousandSeparator prefix="R$" />
+        </span>
+        <Button onClick={handleAddPaymentClick}>ADICIONAR PAGAMENTO</Button>
       </div>
     </PaymentsContainer>
   );
 }
 
 Payments.defaultProps = {
-  remains: 'R$0.00',
-  purchaseAmount: 'R$0.00',
-  amountPaid: 'R$0.00',
+  remains: 0,
+  purchaseAmount: 0,
+  amountPaid: 0,
 };
 
 Payments.propTypes = {
+  handleAddPaymentClick: PropTypes.func.isRequired,
   payments: PropTypes.array.isRequired,
-  remains: PropTypes.string,
-  purchaseAmount: PropTypes.string,
-  amountPaid: PropTypes.string,
+  remains: PropTypes.number,
+  purchaseAmount: PropTypes.number,
+  amountPaid: PropTypes.number,
 };

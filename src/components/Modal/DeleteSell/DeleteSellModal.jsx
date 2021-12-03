@@ -31,10 +31,10 @@ const ContainerVariants = {
   },
 };
 
-export default function DeleteExamModal({
-  examId, id, onScreen, setOnScreen,
+export default function DeleteSellModal({
+  sellId, id, onScreen, setOnScreen,
 }) {
-  const deleteText = 'AO DELETAR ESSE EXAME VOCÊ PERDERÁ TODO OS SEUS DADOS.';
+  const deleteText = 'AO DELETAR ESSA VENDA VOCÊ PERDERÁ TODO OS SEUS DADOS, TAMBÉM DEIXARÁ DE CONSTAR NOS RELATÓRIOS.';
   return (
     <AnimatePresence>
       {onScreen && (
@@ -49,7 +49,7 @@ export default function DeleteExamModal({
           >
             <Header setOnScreen={setOnScreen} />
             <DeleteBody text={deleteText} />
-            <Footer examId={examId} id={id} setOnScreen={setOnScreen} />
+            <Footer sellId={sellId} id={id} setOnScreen={setOnScreen} />
           </Container>
         </Background>
       )}
@@ -57,8 +57,8 @@ export default function DeleteExamModal({
   );
 }
 
-DeleteExamModal.propTypes = {
-  examId: PropTypes.string.isRequired,
+DeleteSellModal.propTypes = {
+  sellId: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   onScreen: PropTypes.bool.isRequired,
   setOnScreen: PropTypes.func.isRequired,
