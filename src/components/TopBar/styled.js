@@ -11,6 +11,7 @@ export const Container = styled.div`
   @media screen and (max-width:768px) {
     justify-content: center;
     padding: .5rem 1rem;
+    display: none;
   }
 
   .material-icons-outlined{

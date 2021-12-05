@@ -15,8 +15,10 @@ import Payments from './Payments';
 import ButtonHandle from './ButtonsHandle';
 import { FormatDate, save } from './fuctions';
 import PaymentModal from '../../components/Modal/PaymentsModal/PaymentModal';
+import IsLoading from '../../components/Loader/IsLoading';
 
 export default function Body({ id, sellid }) {
+  const [loading, setLoading] = useState(true);
   const [sellId, setSellId] = useState(sellid);
   const [payments, setPayments] = useState([]);
   const [lastExamData, setLastExamData] = useState('');
@@ -78,6 +80,7 @@ export default function Body({ id, sellid }) {
   useEffect(() => {
     async function getLastExamData() {
       try {
+        setLoading(true);
         const examResponse = await axios.get(`/clients/${id}/lastexam`);
         setLastExamData(examResponse.data);
 
@@ -118,6 +121,7 @@ export default function Body({ id, sellid }) {
           setSellOs(sell.os);
 
           setInputBlock(true);
+          setLoading(false);
         }
       } catch (error) {
         setLastExamData('');
@@ -257,6 +261,7 @@ export default function Body({ id, sellid }) {
 
   return (
     <BodyContainer>
+      <IsLoading loading={loading} />
       <Frames
         setValueFrame={setValorArm}
         setFrame={setArmacao}

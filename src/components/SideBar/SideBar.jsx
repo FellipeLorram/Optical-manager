@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { Container } from './styled';
 import SideLink from './SideBarLink';
 import Logo from '../Svgs/Logo';
+import MobileNavBar from '../MobileNavBar';
 
 const variants = {
   initial: { opacity: 0 },
@@ -20,30 +21,17 @@ export default function SideBar() {
 
   useEffect(() => {
     if (level > 1) {
-      if (widthScreen > 768) {
-        setLinks(
-          [
-            { text: 'HOME', to: '/', icon: 'home' },
-            { text: 'CLIENTES', to: '/clients', icon: 'people' },
-            { text: 'VENDAS', to: '/sells', icon: 'storefront' },
-            { text: 'EXAMES', to: '/exams', icon: 'description' },
-            { text: 'CONSERTOS', to: '/repairs', icon: 'handyman' },
-            { text: 'ESCRITÓRIO', to: '/officce', icon: 'print' },
-            { text: 'CONFIGURAÇÕES', to: '/configs', icon: 'tune' },
-          ],
-        );
-      } else {
-        setLinks(
-          [
-            { text: 'HOME', to: '/', icon: 'home' },
-            { text: 'CLIENTES', to: '/clients', icon: 'people' },
-            { text: 'VENDAS', to: '/sells', icon: 'storefront' },
-            { text: 'CONSERTOS', to: '/repairs', icon: 'handyman' },
-            { text: 'EXAMES', to: '/exams', icon: 'description' },
-            { text: 'CONFIGURAÇÕES', to: '/configs', icon: 'tune' },
-          ],
-        );
-      }
+      setLinks(
+        [
+          { text: 'HOME', to: '/', icon: 'home' },
+          { text: 'CLIENTES', to: '/clients', icon: 'people' },
+          { text: 'VENDAS', to: '/sells', icon: 'storefront' },
+          { text: 'EXAMES', to: '/exams', icon: 'description' },
+          { text: 'CONSERTOS', to: '/repairs', icon: 'handyman' },
+          { text: 'ESCRITÓRIO', to: '/officce', icon: 'print' },
+          { text: 'CONFIGURAÇÕES', to: '/configs', icon: 'tune' },
+        ],
+      );
     } else if (level < 1) {
       setLinks(
         [
@@ -62,6 +50,7 @@ export default function SideBar() {
     <Container
       open={menuOpen}
     >
+      <MobileNavBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <div className="header">
         <AnimatePresence>
           {menuOpen && (
@@ -109,6 +98,7 @@ export default function SideBar() {
       <div className="body">
         {links.map((link) => (
           <SideLink
+            setMenuOpen={setMenuOpen}
             key={link.text}
             open={menuOpen}
             text={link.text}

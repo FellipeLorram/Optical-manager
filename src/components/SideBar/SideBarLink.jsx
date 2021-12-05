@@ -10,11 +10,13 @@ export default function SideLink({
   text,
   to,
   icon,
+  setMenuOpen,
 }) {
   const locationContext = useContext(GlobalContext);
   const active = locationContext.Location === text;
 
   const handleClickLink = () => {
+    if (window.innerWidth < 768) setMenuOpen(false);
     locationContext.setLocation(text);
   };
 
@@ -60,4 +62,5 @@ SideLink.propTypes = {
   text: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
+  setMenuOpen: PropTypes.func.isRequired,
 };

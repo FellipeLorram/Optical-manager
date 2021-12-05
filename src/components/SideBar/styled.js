@@ -55,7 +55,7 @@ export const Container = styled.div`
   }
 
   @media screen and (max-width:1068px) {
-    width: 94px;
+    width: 90px;
     justify-content: center;
     .header{
       display: none;
@@ -65,22 +65,33 @@ export const Container = styled.div`
   @media screen and (max-width:768px) {
     position: fixed;
     z-index: 2000;
-    left: 0;
-    bottom: 0;
+    left: ${(props) => props.open ? '0' : '-100%'};
+    top: 0;
     width: 100%;
+    height: 100vh;
     border-right: none;
     border-top: 1px solid rgba(228, 228, 228, 0.1);
     padding: 0;
-    height: 3rem;
+    gap: 1rem;
 
     .header{
-      display: none;
-    }
-    .body{
       display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-      flex-direction: row;
+      justify-content: center;
+      padding: 1rem;
+      .toggle--container{
+        display: none;
+      }
+      .LOGO{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg{
+          width: 100%;
+          height: 100%;
+        }
+      }
     }
   }
 `;
@@ -115,9 +126,8 @@ export const Slink = styled(Link)`
     color: ${(props) => props.active === 'true' ? '#355DFF' : '#fff'} ;
   }
   @media screen and (max-width:768px) {
-    margin-bottom: 0;
-    .text{
-      display: none;
-    }
+    justify-content: flex-start;
+    padding: .5rem 2rem;
+    margin-bottom: .5rem;
   }
 `;
