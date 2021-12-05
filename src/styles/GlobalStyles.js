@@ -340,14 +340,14 @@ export const ContainerGrid = styled(motion.div)`
 
   @media screen and (max-width:1080px) {
     grid-template-columns: repeat(2, 1fr);
-    max-height: 350px;
+    max-height: ${(props) => props.overflowY ? '350px' : 'unset'};
     overflow-y: ${(props) => props.overflowY ? 'auto' : 'initial'};
   }
 
   @media screen and (max-width:768px) {
     grid-template-columns: repeat(1, 1fr);
     padding: ${(props) => props.noP ? 0 : '1rem'};
-    max-height: ${(props) => props.overflowY ? '250px' : ''};
+    max-height: ${(props) => props.overflowY ? '250px' : 'unset'};
   }
 `;
 
