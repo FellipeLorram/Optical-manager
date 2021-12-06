@@ -9,9 +9,9 @@ export const Container = styled.div`
   font-size: 1.2rem;
   position: relative;
   @media screen and (max-width:768px) {
-    justify-content: center;
-    padding: .5rem 1rem;
-    display: none;
+    justify-content: flex-start;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(228,228,228, 0.1);
   }
 
   .material-icons-outlined{
@@ -39,6 +39,7 @@ export const InputSearch = styled.input`
 
   @media screen and (max-width:768px) {
     width: 100%;
+    display: none;
   }
   &:focus{
     border: 1px solid rgba(228, 228, 228, 0.8);
@@ -51,7 +52,7 @@ export const UserLogo = styled.div`
   cursor: pointer;
   text-shadow: -2px 2px 3px rgba(0,0,0,0.2);
   @media screen and (max-width:768px) {
-    display: none;
+    font-size: 1.2rem;
   }
 
 `;

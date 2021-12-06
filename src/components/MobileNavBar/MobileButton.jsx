@@ -7,7 +7,7 @@ import history from '../../services/history';
 import { GlobalContext } from '../../contexts';
 
 export default function MobileButton({
-  open,
+  setMenuOpen,
   text,
   to,
   icon,
@@ -16,6 +16,7 @@ export default function MobileButton({
   const active = locationContext.Location === text;
 
   const handleClickLink = () => {
+    setMenuOpen(false);
     history.push(to);
     locationContext.setLocation(text);
   };
@@ -44,7 +45,7 @@ export default function MobileButton({
 }
 
 MobileButton.propTypes = {
-  open: PropTypes.bool.isRequired,
+  setMenuOpen: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,

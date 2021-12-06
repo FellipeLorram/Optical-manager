@@ -46,7 +46,6 @@ export const PaymentMethod = styled.div`
   padding: 1rem 25%;
   border: ${(props) => props.selected ? '1px solid #355DFF' : '1px solid  rgba(228,228,228,0.1)'};
   transition: all .2s ease-in-out;
-  cursor: pointer;
   border-radius: 12px;
   width: 100%;
   font-size: .8rem;
@@ -59,11 +58,14 @@ export const PaymentMethod = styled.div`
   }
 
   &:hover{
+    ${(props) => props.noHover ? '' : `
     border-color: #355DFF;
     color: var(--font-color);
+    cursor: pointer;
     svg{
       stroke: '#808191';
     }
+    `}
   }
 `;
 

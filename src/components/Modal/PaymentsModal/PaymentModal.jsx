@@ -39,6 +39,7 @@ export default function PaymentModal({
   total,
   resta,
   setPayments,
+  dataPayment,
 }) {
   return (
     <>
@@ -61,6 +62,7 @@ export default function PaymentModal({
               sellId={sellId}
               clientId={clientId}
               setPayments={setPayments}
+              dataPayment={dataPayment}
             />
           </Container>
         </Background>
@@ -74,9 +76,13 @@ PaymentModal.defaultProps = {
   clientId: '',
   total: 0,
   resta: 0,
+  dataPayment: {
+    data: false,
+  },
 };
 
 PaymentModal.propTypes = {
+  dataPayment: PropTypes.object,
   total: PropTypes.number,
   resta: PropTypes.number,
   clientId: PropTypes.string,

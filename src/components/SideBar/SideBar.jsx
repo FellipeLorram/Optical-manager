@@ -20,6 +20,7 @@ export default function SideBar() {
   const level = useSelector((state) => state.auth.level);
 
   useEffect(() => {
+    if (widthScreen < 768) setMenuOpen(false);
     if (level > 1) {
       setLinks(
         [
@@ -42,7 +43,7 @@ export default function SideBar() {
   }, [level, widthScreen]);
 
   const handleMenuClick = () => {
-    if (widthScreen < 1068) return;
+    // if (widthScreen < 1068) return;
     setMenuOpen(!menuOpen);
   };
 
@@ -79,7 +80,7 @@ export default function SideBar() {
                 animate="animate"
                 className="material-icons-outlined"
               >
-                menu_open
+                {widthScreen > 768 ? 'menu_open' : 'close'}
               </motion.span>
             ) : (
               <motion.span

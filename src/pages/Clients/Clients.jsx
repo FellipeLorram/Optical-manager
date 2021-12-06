@@ -17,7 +17,7 @@ export default function Clients() {
     async function getData() {
       const response = await axios.get('/clients');
       setData(response.data);
-      setTimeout(() => setLoading(false), 200);
+      setLoading(false);
     }
 
     getData();

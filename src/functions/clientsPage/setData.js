@@ -39,6 +39,7 @@ export const setDataSell = (lastSell) => {
       total: lastSell.total,
       pago: lastSell.pago.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }),
       resta: lastSell.resta.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }),
+      id: lastSell._id,
     };
   }
   return false;

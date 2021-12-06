@@ -76,20 +76,23 @@ export const Container = styled.div`
 
     .header{
       display: flex;
-      justify-content: center;
-      padding: 1rem;
+      justify-content: space-between;
+      padding: 2rem;
+      border-bottom: 1px solid rgba(228, 228, 228, 0.1);
+
       .toggle--container{
-        display: none;
+        width: 50%;
+        justify-content: flex-end;
       }
       .LOGO{
-        width: 100%;
+        width: 50%;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
 
         svg{
-          width: 100%;
-          height: 100%;
+          width: 80%;
+          height: 80%;
         }
       }
     }
@@ -129,5 +132,6 @@ export const Slink = styled(Link)`
     justify-content: flex-start;
     padding: .5rem 2rem;
     margin-bottom: .5rem;
+    font-size: .8rem;
   }
 `;

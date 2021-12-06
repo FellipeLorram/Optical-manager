@@ -22,7 +22,7 @@ export default function MobileMenuButton({
       <motion.span
         className="material-icons-outlined"
       >
-        {menuOpen ? 'menu' : 'menu_open'}
+        {menuOpen ? 'menu_open' : 'menu'}
       </motion.span>
 
       <AnimatePresence>

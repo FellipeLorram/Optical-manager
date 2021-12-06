@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import CurrencyFormat from 'react-currency-format';
 import { InfoContainer } from './styled';
+import history from '../../../services/history';
 
 const variants = {
   initial: {
@@ -18,11 +19,16 @@ const variants = {
   },
 };
 
-export default function LastSell({ data }) {
+export default function LastSell({ data, id }) {
+  const handleClick = (e) => {
+    e.stopPropagation();
+    history.push(`/edit-sell/${id}/${data.id}`);
+  };
   return (
     <>
       {data ? (
         <InfoContainer
+          onClick={(e) => handleClick(e)}
           variants={variants}
           animate="animate"
           initial="initial"
@@ -67,4 +73,5 @@ export default function LastSell({ data }) {
 
 LastSell.propTypes = {
   data: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
+  id: PropTypes.string.isRequired,
 };

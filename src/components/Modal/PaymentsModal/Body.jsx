@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
@@ -17,12 +17,22 @@ import ButtonsControl from './ButtonsControl';
 import axios from '../../../services/axios';
 
 export default function Body({
-  total, remains, setOnScreen, clientId, sellId, setPayments,
+  total, remains, setOnScreen, clientId, sellId, dataPayment,
 }) {
   const seller = useSelector((state) => state.auth.currentUserName);
+  const [paymentId, setPaymentId] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('DINHEIRO');
   const [paymentValue, setPaymentValue] = useState('');
   const [isValidPaymentValue, setIsValidPaymentValue] = useState(true);
+  const [inputBlock, setInputBlock] = useState(false);
+
+  useEffect(() => {
+    if (!dataPayment.data) return;
+    setPaymentMethod(dataPayment.paymentMethod);
+    setPaymentValue(dataPayment.paymentValue);
+    setPaymentId(dataPayment.id);
+    setInputBlock(true);
+  }, [dataPayment]);
 
   const paymentMethods = [
     { text: 'DINHEIRO', icon: Money() },
@@ -32,7 +42,20 @@ export default function Body({
   ];
 
   const handlePaymentMethodClick = (text) => {
+    if (inputBlock) return;
     setPaymentMethod(text);
+  };
+
+  const handleDeleteClick = () => {
+    async function request() {
+      try {
+        await axios.delete(`/clients/payments/${clientId}/${sellId}/${paymentId}`);
+        setOnScreen(false);
+      } catch (error) {
+        setIsValidPaymentValue(false);
+      }
+    }
+    request();
   };
 
   const handleAddPaymentClick = () => {
@@ -40,27 +63,25 @@ export default function Body({
       setIsValidPaymentValue(false);
       return;
     }
-    if (paymentValue > remains) {
+    if (!paymentId && paymentValue > remains) {
       setIsValidPaymentValue(false);
       return;
     }
     async function request() {
       try {
-        await axios.post(`clients/payments/add-payment/${clientId}/${sellId}`, {
-          type: paymentMethod,
-          value: paymentValue,
-          receiveBy: seller,
-        });
-        setPayments((currentArr) => {
-          const newArr = currentArr;
-          newArr.push({
+        if (paymentId) {
+          await axios.put(`/clients/payments/${clientId}/${sellId}/${paymentId}`, {
             type: paymentMethod,
             value: paymentValue,
             receiveBy: seller,
-            PaidIn: Date.now(),
           });
-          return newArr;
-        });
+        } else {
+          await axios.post(`clients/payments/add-payment/${clientId}/${sellId}`, {
+            type: paymentMethod,
+            value: paymentValue,
+            receiveBy: seller,
+          });
+        }
         setOnScreen(false);
       } catch (error) {
         setIsValidPaymentValue(false);
@@ -77,7 +98,15 @@ export default function Body({
           <span>{`Resta: ${remains}`}</span>
         </SellInfoContainer>
 
-        <Input label="VALOR PAGO" text={paymentValue} valid={isValidPaymentValue} setText={setPaymentValue} setValidText={setIsValidPaymentValue} type="number" />
+        <Input
+          label="VALOR PAGO"
+          text={paymentValue}
+          valid={isValidPaymentValue}
+          setText={setPaymentValue}
+          setValidText={setIsValidPaymentValue}
+          type="number"
+          inputBlock={inputBlock}
+        />
 
         <TitleContainer>
           <span>FORMA DE PAGAMENTO</span>
@@ -86,6 +115,7 @@ export default function Body({
         <PaymentMethodContainer>
           {paymentMethods.map((method) => (
             <PaymentMethod
+              noHover={inputBlock}
               onClick={() => handlePaymentMethodClick(method.text)}
               selected={paymentMethod === method.text}
               key={method.text}
@@ -95,7 +125,12 @@ export default function Body({
             </PaymentMethod>
           ))}
         </PaymentMethodContainer>
-        <ButtonsControl saveClick={handleAddPaymentClick} />
+        <ButtonsControl
+          handleDeleteClick={handleDeleteClick}
+          setEdit={setInputBlock}
+          edit={inputBlock}
+          saveClick={handleAddPaymentClick}
+        />
       </div>
     </BodyContainer>
   );
@@ -106,14 +141,15 @@ Body.defaultProps = {
   sellId: '',
   total: 0,
   remains: 0,
+  dataPayment: {},
   setOnScreen: () => 1,
 };
 
 Body.propTypes = {
+  dataPayment: PropTypes.object,
   remains: PropTypes.number,
   total: PropTypes.number,
   setOnScreen: PropTypes.func,
   clientId: PropTypes.string,
   sellId: PropTypes.string,
-  setPayments: PropTypes.func.isRequired,
 };

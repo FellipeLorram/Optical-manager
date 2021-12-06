@@ -11,9 +11,21 @@ export default function Payments({
   purchaseAmount,
   amountPaid,
   handleAddPaymentClick,
+  setDataPayment,
+  setOnScreen,
 }) {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const FormatDate = (date) => new Date(date).toLocaleDateString('pt-BR', options);
+
+  const handleClick = (value, method, id) => {
+    setDataPayment({
+      data: true,
+      paymentMethod: method,
+      paymentValue: value,
+      id,
+    });
+    setOnScreen(true);
+  };
 
   return (
     <PaymentsContainer>
@@ -21,7 +33,10 @@ export default function Payments({
       {payments.length > 0 ? (
         <div className="payment-container-grid">
           {payments.map((payment) => (
-            <Payment>
+            <Payment
+              key={payment._id}
+              onClick={() => handleClick(payment.value, payment.type, payment._id)}
+            >
               <div className="payment-row">
                 <span className="payment-row-text">Pago no:</span>
                 <span>{payment.type}</span>
@@ -81,4 +96,6 @@ Payments.propTypes = {
   remains: PropTypes.number,
   purchaseAmount: PropTypes.number,
   amountPaid: PropTypes.number,
+  setDataPayment: PropTypes.func.isRequired,
+  setOnScreen: PropTypes.func.isRequired,
 };

@@ -19,9 +19,12 @@ import IsLoading from '../../components/Loader/IsLoading';
 
 export default function Body({ id, sellid }) {
   const [loading, setLoading] = useState(true);
+
   const [sellId, setSellId] = useState(sellid);
   const [payments, setPayments] = useState([]);
+
   const [lastExamData, setLastExamData] = useState('');
+
   const [ModalFramesOnScreen, setModalFramesOnScreen] = useState(false);
   const [ModalLensOnScreen, setModalLensOnScreen] = useState(false);
   const [ModalContactLensOnScreen, setModalContactLensOnScreen] = useState(false);
@@ -76,6 +79,11 @@ export default function Body({ id, sellid }) {
   const [resta, setResta] = useState('');
   const [pago, setPago] = useState('');
   const [entregue, setEntregue] = useState('Não entregue');
+
+  const [dataPayment, setDataPayment] = useState({
+    paymentMethod: '',
+    paymentValue: '',
+  });
 
   useEffect(() => {
     async function getLastExamData() {
@@ -145,6 +153,16 @@ export default function Body({ id, sellid }) {
   }, [desconto, total]);
 
   useEffect(() => {
+    async function request() {
+      try {
+        const paymentsResponse = await axios.get(`/clients/payments/${id}/${sellId}`);
+        setPayments(paymentsResponse.data);
+      } catch (error) {
+        return 0;
+      }
+      return 1;
+    }
+    request();
     if (payments.length < 1) {
       setResta(valorDaCompra);
       return;
@@ -158,7 +176,7 @@ export default function Body({ id, sellid }) {
 
     setValorPago(paidValue);
     setResta(Number(valorDaCompra) - Number(paidValue));
-  }, [payments, valorDaCompra]);
+  }, [payments, valorDaCompra, id, sellId]);
 
   const handleLastExamClick = () => {
     if (!lastExamData) return;
@@ -250,6 +268,9 @@ export default function Body({ id, sellid }) {
           });
           setSellId(responseId);
         }
+        setDataPayment({
+          data: false,
+        });
         setModalAddPaymentsOnScreen(true);
       } catch (error) {
         return 1;
@@ -287,6 +308,7 @@ export default function Body({ id, sellid }) {
         clientId={id}
         sellId={sellId}
         setPayments={setPayments}
+        dataPayment={dataPayment}
       />
       {sellDate && (
         <>
@@ -393,11 +415,13 @@ export default function Body({ id, sellid }) {
         <Input inputBlock={inputBlock} label="VALOR DA COMPRA" valid setText={setValorDaCompra} text={valorDaCompra} type="number" />
       </div>
       <Payments
+        setDataPayment={setDataPayment}
         payments={payments}
         remains={Number(resta)}
         purchaseAmount={Number(valorDaCompra)}
         amountPaid={Number(valorPago)}
         handleAddPaymentClick={handleAddPaymentClick}
+        setOnScreen={setModalAddPaymentsOnScreen}
       />
       <div className="container-start">
         <Button>GERAR PDF</Button>

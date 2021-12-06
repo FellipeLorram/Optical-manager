@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import IsLoading from '../../components/Loader/IsLoading';
 import axios from '../../services/axios';
-import { PageContainer } from '../../styles/GlobalStyles';
+import { PageContainer, PageHeader } from '../../styles/GlobalStyles';
 import ActionsContainer from './ActionsContainer';
 import LastExamsContainer from './LastExamsContainer';
 import LastSellsContainer from './LastSellsContainer';

@@ -39,6 +39,7 @@ export default function MobileNavBar({ menuOpen, setMenuOpen }) {
             text={link.text}
             to={link.to}
             icon={link.icon}
+            setMenuOpen={setMenuOpen}
           />
         ))}
       </div>
