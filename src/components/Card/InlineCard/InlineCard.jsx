@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from './styled';
 import { Button, LinkButton } from '../../../styles/GlobalStyles';
@@ -22,7 +22,7 @@ const cardVariants = {
   },
 };
 
-export default function InlineCard({ data, position, setData }) {
+function InlineCardComponent({ data, position, setData }) {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const content = {
     id: data._id,
@@ -77,8 +77,12 @@ export default function InlineCard({ data, position, setData }) {
   );
 }
 
-InlineCard.propTypes = {
+InlineCardComponent.propTypes = {
   data: PropTypes.object.isRequired,
   setData: PropTypes.func.isRequired,
   position: PropTypes.number.isRequired,
 };
+
+const InlineCard = memo(InlineCardComponent);
+
+export default InlineCard;

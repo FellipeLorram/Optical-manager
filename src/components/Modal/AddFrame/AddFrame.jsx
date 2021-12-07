@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 
@@ -33,7 +33,7 @@ const ContainerVariants = {
   },
 };
 
-export default function AddFrame({
+function AddFrameComponent({
   edit, data, onScreen, setOnScreen, setEdit,
 }) {
   const [name, setName] = useState('');
@@ -119,10 +119,14 @@ export default function AddFrame({
   );
 }
 
-AddFrame.propTypes = {
+AddFrameComponent.propTypes = {
   edit: PropTypes.bool.isRequired,
   onScreen: PropTypes.bool.isRequired,
   setOnScreen: PropTypes.func.isRequired,
   setEdit: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 };
+
+const AddFrame = memo(AddFrameComponent);
+
+export default AddFrame;

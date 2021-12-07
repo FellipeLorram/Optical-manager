@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import { InfoContainer } from './styled';
@@ -23,7 +23,7 @@ const variants = {
   },
 };
 
-export default function LastExam({ id, data }) {
+function LastExamComponent({ id, data }) {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const Data = new Date(data.CriadoEm).toLocaleDateString('pt-BR', options);
   const handleClick = (e) => {
@@ -77,11 +77,15 @@ export default function LastExam({ id, data }) {
     </>
   );
 }
-LastExam.defaultProps = {
+LastExamComponent.defaultProps = {
   id: '',
 };
 
-LastExam.propTypes = {
+LastExamComponent.propTypes = {
   id: PropTypes.string,
   data: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
 };
+
+const LastExam = memo(LastExamComponent);
+
+export default LastExam;

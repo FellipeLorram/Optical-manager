@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import CurrencyFormat from 'react-currency-format';
 import { InfoContainer } from './styled';
@@ -22,7 +22,7 @@ const variants = {
   },
 };
 
-export default function LastSell({ data, ClientId }) {
+function LastSellComponent({ data, ClientId }) {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const Data = new Date(data.CriadoEm).toLocaleDateString('pt-BR', options);
   const handleClick = () => {
@@ -65,7 +65,11 @@ export default function LastSell({ data, ClientId }) {
   );
 }
 
-LastSell.propTypes = {
+LastSellComponent.propTypes = {
   ClientId: PropTypes.string.isRequired,
   data: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
 };
+
+const LastSell = memo(LastSellComponent);
+
+export default LastSell;

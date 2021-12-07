@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import CurrencyFormat from 'react-currency-format';
 import { Container } from './styled';
@@ -17,7 +17,7 @@ const cardVariants = {
   },
 };
 
-export default function LastExamCard({ data }) {
+function LastExamCardComponent({ data }) {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const content = {
     clientId: data._id,
@@ -73,6 +73,10 @@ export default function LastExamCard({ data }) {
   );
 }
 
-LastExamCard.propTypes = {
+LastExamCardComponent.propTypes = {
   data: PropTypes.object.isRequired,
 };
+
+const LastExamCard = memo(LastExamCardComponent);
+
+export default LastExamCard;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import { InfoContainer } from './styled';
@@ -22,7 +22,7 @@ const variants = {
   },
 };
 
-export default function LastRepair({ data }) {
+function LastRepairComponent({ data }) {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const Data = new Date(data.CriadoEm).toLocaleDateString('pt-BR', options);
 
@@ -58,6 +58,10 @@ export default function LastRepair({ data }) {
   );
 }
 
-LastRepair.propTypes = {
+LastRepairComponent.propTypes = {
   data: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
 };
+
+const LastRepair = memo(LastRepairComponent);
+
+export default LastRepair;

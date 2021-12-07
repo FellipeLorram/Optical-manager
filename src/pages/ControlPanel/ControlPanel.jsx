@@ -18,7 +18,7 @@ export default function ControlPanel() {
       const dataExams = await axios.get('/clients/exams/last');
       setLastSells(dataSells.data);
       setLastExams(dataExams.data);
-      setTimeout(() => setLoading(false), 200);
+      setLoading(false);
     }
     getData();
   }, []);

@@ -79,7 +79,7 @@ export const BodyContainer = styled.div`
     }
   }
 
-  .column{
+  .column, .row{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -87,7 +87,9 @@ export const BodyContainer = styled.div`
     gap: ${(props) => props.gap ? props.gap : '1rem'};
     width: 100%;
   }
-
+  .row{
+    flex-direction: row;
+  }
 `;
 
 export const FooterContainer = styled(motion.div)`

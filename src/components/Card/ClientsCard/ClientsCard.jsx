@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import PropTypes from 'prop-types';
 
 import { Choice, Container } from './styled';
@@ -19,7 +19,7 @@ const cardVariants = {
   },
 };
 
-export default function ClientsCard({ data }) {
+function ClientsCardComponent({ data }) {
   const [current, setCurrent] = useState(true);
   const [sellSelect, setSellSelect] = useState(true);
   const [examSelect, setExamSelect] = useState(false);
@@ -71,6 +71,10 @@ export default function ClientsCard({ data }) {
   );
 }
 
-ClientsCard.propTypes = {
+ClientsCardComponent.propTypes = {
   data: PropTypes.object.isRequired,
 };
+
+const ClientsCard = memo(ClientsCardComponent);
+
+export default ClientsCard;

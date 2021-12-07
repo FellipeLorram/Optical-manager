@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import CurrencyFormat from 'react-currency-format';
 import { Container } from './styled';
@@ -17,7 +17,7 @@ const cardVariants = {
   },
 };
 
-export default function LastSellCard({ data }) {
+function LastSellCardComponent({ data }) {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const content = {
     id: data._id,
@@ -63,6 +63,10 @@ export default function LastSellCard({ data }) {
   );
 }
 
-LastSellCard.propTypes = {
+LastSellCardComponent.propTypes = {
   data: PropTypes.object.isRequired,
 };
+
+const LastSellCard = memo(LastSellCardComponent);
+
+export default LastSellCard;

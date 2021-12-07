@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import CurrencyFormat from 'react-currency-format';
 import { Container } from './styled';
@@ -16,7 +16,7 @@ const cardVariants = {
   },
 };
 
-export default function RepairCard({ data }) {
+function RepairCardComponent({ data }) {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const content = {
     nome: data.nome,
@@ -52,6 +52,10 @@ export default function RepairCard({ data }) {
   );
 }
 
-RepairCard.propTypes = {
+RepairCardComponent.propTypes = {
   data: PropTypes.object.isRequired,
 };
+
+const RepairCard = memo(RepairCardComponent);
+
+export default RepairCard;

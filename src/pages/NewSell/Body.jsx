@@ -16,6 +16,7 @@ import ButtonHandle from './ButtonsHandle';
 import { FormatDate, save } from './fuctions';
 import PaymentModal from '../../components/Modal/PaymentsModal/PaymentModal';
 import IsLoading from '../../components/Loader/IsLoading';
+import PdfModal from '../../components/Modal/PdfModal/Index';
 
 export default function Body({ id, sellid }) {
   const [loading, setLoading] = useState(true);
@@ -29,6 +30,7 @@ export default function Body({ id, sellid }) {
   const [ModalLensOnScreen, setModalLensOnScreen] = useState(false);
   const [ModalContactLensOnScreen, setModalContactLensOnScreen] = useState(false);
   const [ModalAddPaymentsOnScreen, setModalAddPaymentsOnScreen] = useState(false);
+  const [ModalPdfOnScreen, setModalPdfOnScreen] = useState(false);
 
   const [sellOs, setSellOs] = useState('');
   const [sellDate, setSellDate] = useState('');
@@ -310,6 +312,10 @@ export default function Body({ id, sellid }) {
         setPayments={setPayments}
         dataPayment={dataPayment}
       />
+      <PdfModal
+        onScreen={ModalPdfOnScreen}
+        setOnScreen={setModalPdfOnScreen}
+      />
       {sellDate && (
         <>
           <div className="title">
@@ -424,7 +430,7 @@ export default function Body({ id, sellid }) {
         setOnScreen={setModalAddPaymentsOnScreen}
       />
       <div className="container-start">
-        <Button>GERAR PDF</Button>
+        <Button onClick={() => setModalPdfOnScreen(true)}>GERAR PDF</Button>
       </div>
       <ButtonHandle
         inputBlock={inputBlock}
