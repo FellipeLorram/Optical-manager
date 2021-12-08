@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { BodyContainer } from '../styled';
+import { BodyContainer, FooterContainer } from '../styled';
 import Switch from './Switch';
 import { SwitchContainer } from './styled';
 import Paper from './Paper';
@@ -21,17 +21,16 @@ export default function Body() {
   ];
   return (
     <BodyContainer>
-      <div className="row">
-        <div
-          className="column"
-        >
-          {switchs.map((swit) => (
-            <SwitchContainer>
-              <Switch label={swit.label} isOn={swit.isOn} setIsOn={swit.setIsOn} />
-            </SwitchContainer>
-          ))}
-        </div>
-        <div className="column">
+      <div className="column">
+
+        <div className="row">
+          <div className="column">
+            {switchs.map((swit) => (
+              <SwitchContainer key={swit.label}>
+                <Switch label={swit.label} isOn={swit.isOn} setIsOn={swit.setIsOn} />
+              </SwitchContainer>
+            ))}
+          </div>
           <Paper switchs={{
             labSwitch,
             clientSwitch,
@@ -39,8 +38,10 @@ export default function Body() {
             paymentSwitch,
           }}
           />
-          <Button>GERAR</Button>
         </div>
+        <FooterContainer>
+          <Button>IMPRIMIR</Button>
+        </FooterContainer>
       </div>
     </BodyContainer>
   );

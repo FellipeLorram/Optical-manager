@@ -145,6 +145,8 @@ export const Button = styled(motion.button)`
     color: #000;
   }
 
+  
+
 `;
 
 export const LinkButton = styled(Link)`

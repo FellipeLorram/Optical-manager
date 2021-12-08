@@ -7,7 +7,8 @@ export const PaymentMethodContainer = styled.div`
   width: 100%;
   gap: 1rem;
   @media screen and (max-width: 768px) {
-    grid-template-columns: 1fr;
+    // grid-template-columns: 1fr;
+    gap: .8rem;
   }
 `;
 
@@ -21,6 +22,7 @@ export const SellInfoContainer = styled.div`
   flex-direction: row;
   gap: 2rem;
   @media screen and (max-width: 768px) {
+    gap: 1rem;
   }
 `;
 
@@ -67,6 +69,18 @@ export const PaymentMethod = styled.div`
     }
     `}
   }
+  @media screen and (max-width: 768px) {
+    padding: 1rem;
+    font-size: .7rem;
+    justify-content: flex-start;
+    gap: 5%;
+    svg{
+      width: 12px;
+      height: 12px;
+    }
+
+  }
+
 `;
 
 export const ButtonContainer = styled.div`

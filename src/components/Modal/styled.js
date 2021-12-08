@@ -90,6 +90,12 @@ export const BodyContainer = styled.div`
   .row{
     flex-direction: row;
   }
+  @media screen and (max-width: 768px) {
+    .column, .row{
+      gap: 1rem;
+    }
+  }
+
 `;
 
 export const FooterContainer = styled(motion.div)`

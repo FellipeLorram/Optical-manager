@@ -20,8 +20,8 @@ export const PaperComponentContainer = styled.div`
   .paper{
     height: 15rem;
     width: 60%;
-    background: #fff;
-    border-radius: 12px;
+    background: #e1e1e6;
+    border-radius: 2px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
     display: flex;
@@ -29,7 +29,7 @@ export const PaperComponentContainer = styled.div`
     justify-content: flex-start;
     gap: .2rem;
     flex-direction: column;
-    padding: 1rem .4rem;
+    padding: .8rem .3rem;
   }
 
   @media screen and (max-width: 768px){
@@ -40,6 +40,6 @@ export const PaperComponentContainer = styled.div`
 export const BlockLetters = styled.div`
   width: 90%;
   padding: ${(props) => props.large ? '.8rem' : '.4rem'};
-  border-radius: 5px;
-  background: #ccc;
+  border-radius: 1px;
+  background-image: linear-gradient(to bottom, #b3b3b3, #aaa);
 `;
