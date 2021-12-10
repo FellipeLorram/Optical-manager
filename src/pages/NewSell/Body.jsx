@@ -19,7 +19,7 @@ import IsLoading from '../../components/Loader/IsLoading';
 import PdfModal from '../../components/Modal/PdfModal/Index';
 
 export default function Body({ id, sellid }) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const [sellId, setSellId] = useState(sellid);
   const [payments, setPayments] = useState([]);
@@ -131,8 +131,8 @@ export default function Body({ id, sellid }) {
           setSellOs(sell.os);
 
           setInputBlock(true);
-          setLoading(false);
         }
+        setLoading(false);
       } catch (error) {
         setLastExamData('');
       }
