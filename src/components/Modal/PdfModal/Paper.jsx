@@ -27,12 +27,6 @@ export default function Paper({ switchs }) {
             <BlockLetters />
           </>
         )}
-        {switchs.paymentSwitch && (
-          <>
-            <BlockLetters />
-            <BlockLetters large />
-          </>
-        )}
       </div>
     </PaperComponentContainer>
   );

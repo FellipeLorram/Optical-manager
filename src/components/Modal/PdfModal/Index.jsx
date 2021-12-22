@@ -34,6 +34,7 @@ const ContainerVariants = {
 function PdfModalComponent({
   onScreen,
   setOnScreen,
+  PdfContent,
 }) {
   return (
     <>
@@ -49,7 +50,7 @@ function PdfModalComponent({
             variants={ContainerVariants}
           >
             <Header setOnScreen={setOnScreen} />
-            <Body />
+            <Body PdfContent={PdfContent} />
           </Container>
         </Background>
       )}
@@ -63,6 +64,7 @@ PdfModalComponent.defaultProps = {
 PdfModalComponent.propTypes = {
   onScreen: PropTypes.bool.isRequired,
   setOnScreen: PropTypes.func.isRequired,
+  PdfContent: PropTypes.object.isRequired,
 };
 
 const PdfModal = memo(PdfModalComponent);

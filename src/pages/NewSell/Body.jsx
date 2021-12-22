@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import CurrencyFormat from 'react-currency-format';
+import { useSelector } from 'react-redux';
 
 import history from '../../services/history';
 import axios from '../../services/axios';
@@ -19,6 +20,12 @@ import IsLoading from '../../components/Loader/IsLoading';
 import PdfModal from '../../components/Modal/PdfModal/Index';
 
 export default function Body({ id, sellid }) {
+  const randomOs = Math.floor(Math.random() * (2000 - 1)) + 1;
+
+  const [clientName, setClientName] = useState('');
+  const [clientAdress, setClientAdress] = useState('');
+  const [telefone, setTelefone] = useState('');
+
   const [loading, setLoading] = useState(false);
 
   const [sellId, setSellId] = useState(sellid);
@@ -88,12 +95,15 @@ export default function Body({ id, sellid }) {
   });
 
   useEffect(() => {
-    async function getLastExamData() {
+    async function getData() {
       try {
         setLoading(true);
         const examResponse = await axios.get(`/clients/${id}/lastexam`);
         setLastExamData(examResponse.data);
-
+        const { data } = await axios.get(`/clients/${id}`);
+        setClientName(data[0].nome);
+        setClientAdress(data[0].endereço);
+        setTelefone(data[0].telefone);
         if (sellId) {
           const sellResponse = await axios.get(`/clients/${id}/sells/${sellId}`);
           const paymentsResponse = await axios.get(`/clients/payments/${id}/${sellId}`);
@@ -137,7 +147,7 @@ export default function Body({ id, sellid }) {
         setLastExamData('');
       }
     }
-    getLastExamData();
+    getData();
   }, [id, sellId]);
 
   useEffect(() => {
@@ -155,16 +165,6 @@ export default function Body({ id, sellid }) {
   }, [desconto, total]);
 
   useEffect(() => {
-    async function request() {
-      try {
-        const paymentsResponse = await axios.get(`/clients/payments/${id}/${sellId}`);
-        setPayments(paymentsResponse.data);
-      } catch (error) {
-        return 0;
-      }
-      return 1;
-    }
-    request();
     if (payments.length < 1) {
       setResta(valorDaCompra);
       return;
@@ -178,7 +178,7 @@ export default function Body({ id, sellid }) {
 
     setValorPago(paidValue);
     setResta(Number(valorDaCompra) - Number(paidValue));
-  }, [payments, valorDaCompra, id, sellId]);
+  }, [payments, valorDaCompra]);
 
   const handleLastExamClick = () => {
     if (!lastExamData) return;
@@ -200,7 +200,7 @@ export default function Body({ id, sellid }) {
     async function request() {
       try {
         const responseId = await save(id, {
-          os: Math.floor(Math.random() * (2000 - 1)) + 1,
+          os: randomOs,
           esfOd: `${EsfOdSign}${esfOd}`,
           cilOd: `-${cilOd}`,
           eixoOd,
@@ -282,6 +282,31 @@ export default function Body({ id, sellid }) {
     request();
   };
 
+  const PdfContent = {
+    clientPhone: telefone,
+    clientName,
+    clientAdress,
+    telefone,
+    armacao,
+    lente,
+    valorArm,
+    valorLen,
+    total,
+    resta,
+    pago,
+    sellDate: sellDate || FormatDate(Date.now()),
+    esfOd,
+    esfOe,
+    cilOd,
+    cilOe,
+    eixoOd,
+    eixoOe,
+    adicao,
+    dnpOd,
+    dnpOe,
+    sellOs: sellOs || randomOs,
+  };
+
   return (
     <BodyContainer>
       <IsLoading loading={loading} />
@@ -315,6 +340,7 @@ export default function Body({ id, sellid }) {
       <PdfModal
         onScreen={ModalPdfOnScreen}
         setOnScreen={setModalPdfOnScreen}
+        PdfContent={PdfContent}
       />
       {sellDate && (
         <>
