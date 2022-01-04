@@ -11,6 +11,7 @@ export default function Header({ id }) {
   const [client, setClient] = useState([]);
 
   useEffect(() => {
+    if (!id) return;
     async function getData() {
       try {
         const { data } = await axios.get(`/clients/${id}`);

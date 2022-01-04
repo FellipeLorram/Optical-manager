@@ -12,9 +12,9 @@ import Header from '../../components/ClientInfoContainer/Header';
 import Body from './Body';
 import { SeeLastExam } from './styled';
 import LastExam from './LastExam';
-import axios from '../../services/axios';
+import DeleteExamModal from '../../Widgets/Modals/DeleteModal/Index';
 import history from '../../services/history';
-import DeleteExamModal from '../../components/Modal/DeleteExam/DeleteExamModal';
+import axios from '../../services/axios';
 
 export default function NewExam({ match }) {
   const [deleteModalOnScreen, setDeleteModalOnScreen] = useState(false);
@@ -22,11 +22,23 @@ export default function NewExam({ match }) {
   const id = get(match, 'params.id', '');
   const examId = get(match, 'params.examid', '');
 
+  const handleDeleteClick = () => {
+    async function Request() {
+      try {
+        await axios.delete(`/clients/${id}/exams/${examId}`);
+        setDeleteModalOnScreen(false);
+        history.push('/clients');
+      } catch (error) {
+        history.push(`/client/${id}`);
+      }
+    }
+    Request();
+  };
+
   return (
     <PageContainer>
       <DeleteExamModal
-        id={id}
-        examId={examId}
+        handleClick={handleDeleteClick}
         onScreen={deleteModalOnScreen}
         setOnScreen={setDeleteModalOnScreen}
       />

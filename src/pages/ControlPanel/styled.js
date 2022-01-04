@@ -105,6 +105,7 @@ export const CardsContainer = styled.div`
     width: 100%;
     font-size: 1.5rem;
     padding: 1rem;
+    color: #808191;
   }
     /* width */
   &::-webkit-scrollbar {

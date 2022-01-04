@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import AddFrame from '../../components/Modal/AddFrame/AddFrame';
 
+import AddFrame from '../../Widgets/Modals/AddFrame/Index';
 import IsLoading from '../../components/Loader/IsLoading';
 import Arrow from '../../components/Svgs/ArrowBack/ArrowLeft';
 import axios from '../../services/axios';

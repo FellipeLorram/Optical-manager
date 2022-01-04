@@ -12,7 +12,7 @@ export default function LastExamsContainer({ data }) {
         </div>
       </RowContainer>
       <CardsContainer>
-        {data.length > 0 ? data.map((exams) => (
+        {data && data.length > 0 ? data.map((exams) => (
           <Card key={exams.exam._id} data={exams} />
         )) : (
           <div className="no-data">Não há exames no sistema</div>
@@ -22,6 +22,10 @@ export default function LastExamsContainer({ data }) {
   );
 }
 
+LastExamsContainer.defaultProps = {
+  data: [],
+};
+
 LastExamsContainer.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.array,
 };

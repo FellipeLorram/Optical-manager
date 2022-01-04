@@ -64,7 +64,8 @@ export const BodyContainer = styled.div`
 
   .alert--card{
     width: 100%;
-    background: #cc9900;
+    background: rgba(187, 128, 9, 0.15);
+    border: 1px solid rgba(187, 128, 9, 0.4);
     border-radius: 12px;
     padding: 1rem;
     font-size: .8rem;
@@ -73,7 +74,7 @@ export const BodyContainer = styled.div`
     justify-content: center;
     flex-direction: column;
     gap: 1rem;
-    color: #000;
+    color: #C9D1D9;
     span{
       line-height: 1rem;
     }
@@ -153,12 +154,7 @@ export const OtherOptionContainer = styled.div`
   flex-direction: row;
   gap: 1rem;
   width: 100%;
-  .input--container{
-    width: 80%;
-  }
-  .btn--container{
-    width: 20%;
-  }
+
   @media screen and (max-width: 768px){
     flex-direction: column;
 

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 import history from '../../services/history';
 import axios from '../../services/axios';
-import { BodyContainer } from './styled';
-import Input from './Input';
-import InputSign from './InputSign';
-import ButtonsControl from './ButtonsControl';
+import { FormBodyContainer } from '../../styles/GlobalStyles';
+import Input from '../../components/Input/Input';
+import InputSign from '../../styles/GlobalComponents/InputSign';
+import ButtonsHandle from '../../styles/GlobalComponents/ButtonsHandle';
 
 export default function Body({ id, examId }) {
   const [examDate, setExamDate] = useState('');
@@ -67,13 +67,14 @@ export default function Body({ id, examId }) {
 
   const [rxAdd, setRxAdd] = useState('');
   const [isValidRxAdd, setIsValidRxAdd] = useState(true);
+
   useEffect(() => {
     if (!examId) return;
     async function getData() {
       try {
         const { data } = await axios.get(`/clients/${id}/exams/${examId}`);
-        const odSign = data[0].LsEsfOd[0];
-        const oeSign = data[0].LsEsfOe[0];
+        const odSign = data[0].rxEsfOd[0];
+        const oeSign = data[0].rxEsfOe[0];
 
         setEsfOdSign(odSign);
         setEsfOeSign(oeSign);
@@ -257,7 +258,7 @@ export default function Body({ id, examId }) {
   };
 
   return (
-    <BodyContainer>
+    <FormBodyContainer>
       {examId && (
         <div className="sub-title">
           CONSULTA DIA
@@ -342,12 +343,13 @@ export default function Body({ id, examId }) {
       <div className="input--container">
         <Input inputBlock={inputBlock} label="ADIÇÃO" valid={isValidRxAdd} setValidText={setIsValidRxAdd} setText={setRxAdd} text={rxAdd} type="number" />
       </div>
-      <ButtonsControl
+      <ButtonsHandle
+        inputBlock={inputBlock}
         setInputBlock={setInputBlock}
-        examId={examId}
-        handleClickSaveButton={handleClickSaveButton}
+        id={examId}
+        handleAddSaveClick={handleClickSaveButton}
       />
-    </BodyContainer>
+    </FormBodyContainer>
   );
 }
 

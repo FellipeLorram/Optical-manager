@@ -10,7 +10,9 @@ import {
 } from '../../styles/GlobalStyles';
 import Header from '../../components/ClientInfoContainer/Header';
 import Body from './Body';
-import DeleteSellModal from '../../components/Modal/DeleteSell/DeleteSellModal';
+import DeleteSellModal from '../../Widgets/Modals/DeleteModal/Index';
+import history from '../../services/history';
+import axios from '../../services/axios';
 
 export default function NewSell({ match }) {
   const [deleteModalOnScreen, setDeleteModalOnScreen] = useState(false);
@@ -18,13 +20,25 @@ export default function NewSell({ match }) {
   const id = get(match, 'params.id', '');
   const sellId = get(match, 'params.sellid', '');
 
+  const handleDeleteClick = () => {
+    async function Request() {
+      try {
+        await axios.delete(`/clients/${id}/${sellId}`);
+        setDeleteModalOnScreen(false);
+        history.goBack();
+      } catch (error) {
+        history.push('/clients');
+      }
+    }
+    Request();
+  };
+
   return (
     <PageContainer>
       <DeleteSellModal
         onScreen={deleteModalOnScreen}
         setOnScreen={setDeleteModalOnScreen}
-        sellId={sellId}
-        id={id}
+        handleClick={handleDeleteClick}
       />
       <PageHeader>
         <Arrow />

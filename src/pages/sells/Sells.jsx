@@ -10,13 +10,13 @@ import {
 } from '../../styles/GlobalStyles';
 
 export default function Sells() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   useEffect(() => {
     async function getData() {
       const response = await axios.get('/clients/sells/all');
       setData(response.data);
-      setTimeout(() => setLoading(false), 200);
+      setLoading(false);
     }
 
     getData();
@@ -38,7 +38,7 @@ export default function Sells() {
             ))}
           </>
         ) : (
-          <div className="no-content">NÃO HÁ VENDAS NO SISTEMA</div>
+          <div className="no-content">Não há vendas no sistema.</div>
         )}
       </ContainerGrid>
     </PageContainer>

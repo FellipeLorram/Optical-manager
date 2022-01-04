@@ -25,7 +25,7 @@ export default function Repairs() {
     <PageContainer>
       <IsLoading loading={loading} />
       <PageHeader>
-        <AddButton to="/">NOVO CONSERTO</AddButton>
+        <AddButton to="/new-repair">NOVO CONSERTO</AddButton>
       </PageHeader>
       {data.length > 0 ? (
 
@@ -36,7 +36,7 @@ export default function Repairs() {
         </ContainerGrid>
 
       ) : (
-        <div className="no-content">NÃO HÁ CONSERTOS NO SISTEMA</div>
+        <div className="no-content">Não há consertos no sistema</div>
       )}
     </PageContainer>
   );

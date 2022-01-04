@@ -54,6 +54,166 @@ body {
 }
 `;
 
+// Constructor
+
+export const PageHeader = styled.div`
+  width: 100%;
+  padding: 1.5rem 0 ;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  font-size: 1.5rem;
+  color: var(--font-color);
+  @media screen and (max-width:768px) {
+    padding: 1rem;
+  }
+`;
+
+export const LineSeparator = styled.div`
+  height: 1px;
+  width: 100%;
+  background: rgba(228, 228, 228, 0.1);
+`;
+
+export const Delete = styled.div`
+  margin-top: 2rem;
+  font-size: .8rem;
+  color: #d93737;
+  display: flex;
+  justify-content: flex-end;
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
+export const SwitchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: .8rem;
+  span{
+    font-size: .8rem;
+    color: ${(props) => props.isOn ? 'var(--font-color)' : '#808191'};
+  }
+`;
+
+export const HandleContainer = styled.div`
+  width: 3rem;
+  height: 2rem;
+  background-color: var(--input-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: ${(props) => props.isOn ? 'flex-end' : 'flex-start'};
+  border-radius: 50px;
+  padding: 0.2rem;
+  cursor: pointer;
+
+  .handle{
+    width: 50%;
+    height: 80%;
+    background-color: ${(props) => props.isOn ? '#355DFF' : '#808191'};
+    border-radius: 50%;
+  }
+`;
+
+// Containers
+
+export const FormBodyContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 12px;
+  background: var(--card-bg-color);
+  font-size: 1.2rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;
+  padding: 1.5rem;
+  border: 1px solid rgba(228, 228, 228, 0.1);
+  gap: 1.5rem;
+  width: 100%;
+  margin-top: 1.5rem;
+  .title{
+    width: 100%;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 2rem;
+    padding-top: 1rem;
+  }
+  .sub-title{
+    width: 100%;
+    text-align: left;
+    font-size: .8rem;
+    color: #808191;
+    line-height: 2rem;
+    padding: .5rem 0;
+  }
+  .input--container, .input--container--start{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 100%;
+    flex-direction: row;
+  }
+  .input--container--start{
+    justify-content: flex-start;
+  }
+  @media screen and (max-width:408px) {
+    .input--container{
+      flex-direction: column;
+    }
+  }
+`;
+
+export const FormContainer = styled(motion.div)`
+  width: 100%;
+  border: 1px solid rgba(228, 228, 228, 0.1);
+  border-radius: 12px;
+  background: var(--card-color);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 1.5rem;
+  color: var(--font-color);
+  gap: 1.5rem;
+
+  .row--2, .row--start{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+  .row--start{
+    justify-content: flex-start;
+  }
+
+  .footer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: ${(props) => props.buttonEnd ? 'flex-end' : 'space-between'};
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+
+  @media screen and (max-width:408px) {
+    gap: 2rem;
+
+    .row--2, .footer{
+      flex-direction: column;
+    }
+    .footer{
+      align-items: flex-start;
+      flex-direction: row;
+    }
+  }
+`;
+
 export const Container = styled.div`
   position: relative;
   width: 100%;
@@ -62,6 +222,15 @@ export const Container = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   background: var(--main-color);
+
+  .container-end{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1rem;
+    gap: 1rem;
+  }
 `;
 
 export const PageContainer = styled(motion.div)`
@@ -75,7 +244,7 @@ export const PageContainer = styled(motion.div)`
 
   .no-content{
     padding: 2rem 1rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
     width: 100%;
     color: #808191;
     border-bottom: 1px solid rgba(228, 228, 228, 0.1);
@@ -123,206 +292,6 @@ export const Main = styled.div`
 
 `;
 
-export const Button = styled(motion.button)`
-  width: ${(props) => props.mW && '100%'};
-  border-radius: 12px;
-  padding: 1rem 1.5rem;
-  background: ${(props) => props.cancel ? '#d93737' : '#355DFF'} ;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  font-family: var(--main-font);
-  font-weight: 700;
-  color: #fff;
-  transition: all .15s ease-in-out;
-  text-decoration: none;
-  text-align: center;
-  font-size: .8rem;
-
-
-  &:hover{
-    filter: brightness(90%);
-    color: #000;
-  }
-
-  
-
-`;
-
-export const LinkButton = styled(Link)`
-  border-radius: 12px;
-  padding: 1rem;
-  background: #355DFF;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  font-family: var(--main-font);
-  font-weight: 700;
-  color: #fff;
-  transition: all .15s ease-in-out;
-  text-decoration: none;
-  text-align: center;
-  font-size: .8rem;
-  &:hover{
-    filter: brightness(90%);
-    color: #000;
-  }
-`;
-
-export const InputWrapper = styled(motion.div)`
-  width: 100%;
-  position: relative;
-
-  .label{
-    position: absolute;
-    width: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    top: ${(props) => props.animateLabel ? '25%' : '45%'};
-    left: 1.1rem;
-    color: #808191;
-    font-size: .6rem;
-    transition: all .2s ease-in-out;
-    font-weight: 700;
-    .invalid{
-      color: red;
-    }
-  }
-  input{
-    width: 100%;
-    padding: 1rem 1rem .2rem 1rem;
-    height: 80px;
-    background: var(--input-bg-color);
-    outline: none;
-    border-radius: 12px;
-    border: ${(props) => props.valid ? '2px solid rgba(228,228,228,0.1)' : '2px solid #d93737'};
-    color: var(--font-color);
-    font-family: var(--main-font);
-    transition: all .2s ease-in-out;
-    font-weight: bold;
-    font-size: 1rem;
-
-    &:focus{
-      border-color: ${(props) => props.valid ? '#355DFF' : '#d93737'};
-    }
-    @media screen and (max-width:408px) {
-      height: 60px;
-    }
-  }
-  textarea{
-    width: 100%;
-    padding: 2.5rem 1rem .2rem 1rem;
-    height: 80px;
-    background: var(--input-bg-color);
-    outline: none;
-    border-radius: 12px;
-    border: ${(props) => props.valid ? '2px solid rgba(228,228,228,0.1)' : '2px solid #d93737'};
-    color: var(--font-color);
-    font-family: var(--main-font);
-    transition: all .2s ease-in-out;
-    font-weight: bold;
-    font-size: 1rem;
-    resize: none;
-
-    &:focus{
-      border-color: ${(props) => props.valid ? '#355DFF' : '#d93737'};
-    }
-  }
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-`;
-
-export const InputWrapperSmall = styled(motion.div)`
-  width: 100%;
-  position: relative;
-
-  .label{
-    position: absolute;
-    width: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    top: ${(props) => props.animateLabel ? '25%' : '45%'};
-    left: 1.1rem;
-    color: #808191;
-    font-size: .6rem;
-    transition: all .2s ease-in-out;
-    font-weight: 700;
-    .invalid{
-      color: red;
-    }
-  }
-  input{
-    width: 100%;
-    padding: 1rem 1rem .2rem 1rem;
-    height: 60px;
-    background: var(--input-bg-color);
-    outline: none;
-    border-radius: 12px;
-    border: ${(props) => props.valid ? '2px solid rgba(228,228,228,0.1)' : '2px solid #d93737'};
-    color: var(--font-color);
-    font-family: var(--main-font);
-    transition: all .2s ease-in-out;
-    font-weight: bold;
-    font-size: 1rem;
-
-    &:focus{
-      border-color: ${(props) => props.valid ? '#355DFF' : '#d93737'};
-    }
-    @media screen and (max-width:408px) {
-      height: 60px;
-    }
-  }
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-`;
-
-export const PageHeader = styled.div`
-  width: 100%;
-  padding: 1.5rem 0 ;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 2rem;
-  font-size: 1.5rem;
-  color: var(--font-color);
-  @media screen and (max-width:768px) {
-    padding: 1rem;
-  }
-`;
-
-export const AddButton = styled(Link)`
-  padding: .5rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;;
-  color: #fff;
-  border-radius: 12px;
-  padding: 1.1rem;
-  background: #355DFF;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  font-family: var(--main-font);
-  font-weight: 700;
-  transition: all .15s ease-in-out;
-  text-decoration: none;
-  gap: .5rem;
-  font-size: 1rem;
-  &:hover{
-    filter: brightness(90%);
-    color: #000;
-  }
-`;
-
 export const ContainerGrid = styled(motion.div)`
   width: 100%;
   display: grid;
@@ -333,8 +302,9 @@ export const ContainerGrid = styled(motion.div)`
   padding: ${(props) => props.noP ? 0 : '1rem'};
 
   .no-content{
+    width: 100%;
     padding: 1rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
     width: 100%;
     color: #808191;
     line-height: 2rem;
@@ -377,21 +347,28 @@ export const RowContainer = styled.div`
 
 `;
 
-export const LineSeparator = styled.div`
-  height: 1px;
+export const OtherOptionContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 1rem;
   width: 100%;
-  background: rgba(228, 228, 228, 0.1);
+
+  @media screen and (max-width: 768px){
+    flex-direction: column;
+
+    .input--container{
+    width: 100%;
+  }
+  .btn--container{
+    width: 100%;
+    text-align: right;
+  }
+  }
 `;
 
-export const Delete = styled.div`
-  margin-top: 2rem;
-  font-size: .8rem;
-  color: #d93737;
-  display: flex;
-  justify-content: flex-end;
-  text-decoration: underline;
-  cursor: pointer;
-`;
+// Buttons
 
 export const LinkButtonSvg = styled(Link)`
   display: flex;
@@ -442,33 +419,205 @@ export const LinkButtonSvg = styled(Link)`
   }
 `;
 
-export const SwitchContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  gap: .8rem;
-  span{
-    font-size: .8rem;
-    color: ${(props) => props.isOn ? 'var(--font-color)' : '#808191'};
+export const Button = styled(motion.button)`
+  width: ${(props) => props.mW && '100%'};
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  background: ${(props) => props.cancel ? '#d93737' : '#355DFF'} ;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--main-font);
+  font-weight: 700;
+  color: #fff;
+  transition: all .15s ease-in-out;
+  text-decoration: none;
+  text-align: center;
+  font-size: .8rem;
+
+
+  &:hover{
+    filter: brightness(90%);
+    color: #000;
   }
 `;
 
-export const HandleContainer = styled.div`
-  width: 3rem;
-  height: 2rem;
-  background-color: var(--input-bg-color);
+export const LinkButton = styled(Link)`
+  border-radius: 12px;
+  padding: 1rem;
+  background: #355DFF;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--main-font);
+  font-weight: 700;
+  color: #fff;
+  transition: all .15s ease-in-out;
+  text-decoration: none;
+  text-align: center;
+  font-size: .8rem;
+  &:hover{
+    filter: brightness(90%);
+    color: #000;
+  }
+`;
+
+export const AddButton = styled(Link)`
+  padding: .5rem 1rem;
   display: flex;
   align-items: center;
-  justify-content: ${(props) => props.isOn ? 'flex-end' : 'flex-start'};
-  border-radius: 50px;
-  padding: 0.2rem;
+  justify-content: space-between;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;;
+  color: #fff;
+  border-radius: 12px;
+  padding: 1.1rem;
+  background: #355DFF;
+  outline: none;
+  border: none;
   cursor: pointer;
-
-  .handle{
-    width: 50%;
-    height: 80%;
-    background-color: ${(props) => props.isOn ? '#355DFF' : '#808191'};
-    border-radius: 50%;
+  font-family: var(--main-font);
+  font-weight: 700;
+  transition: all .15s ease-in-out;
+  text-decoration: none;
+  gap: .5rem;
+  font-size: 1rem;
+  &:hover{
+    filter: brightness(90%);
+    color: #000;
   }
+`;
+
+// Input
+
+export const InputSignWrapper = styled(motion.div)`
+  width: 100%;
+  position: relative;
+
+  button{
+    position: absolute;
+    left: 0;
+    top: 0%;
+    height: 100%;
+    min-width: 40px;
+    background: var(--card-bg-color);
+    color: #808191;
+    outline: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 2;
+    border: none;
+    border-right: ${(props) => props.animateLabel ? '2px solid #355DFF' : '1px solid rgba(228, 228, 228, 0.1)'};
+    border-radius: 12px 0 0 12px;
+    transition: all .2s ease-in-out;
+  }
+
+  .label{
+    position: absolute;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    top: ${(props) => props.animateLabel ? '22%' : '45%'};
+    left: ${(props) => props.button ? '3rem' : '1.1rem'};
+    color: #808191;
+    font-size: .7rem;
+    transition: all .2s ease-in-out;
+    font-weight: 700;
+    .invalid{
+      color: red;
+    }
+  }
+  input{
+    width: 100%;
+    padding: ${(props) => props.button ? '1rem 1rem .2rem 3rem' : '1rem 1rem .2rem 1rem'};
+    height: 60px;
+    background: var(--input-bg-color);
+    outline: none;
+    border-radius: 12px;
+    border: ${(props) => props.valid ? '2px solid rgba(228,228,228,0.1)' : '2px solid #d93737'};
+    color: var(--font-color);
+    font-family: var(--main-font);
+    transition: all .2s ease-in-out;
+    font-weight: bold;
+    font-size: 1rem;
+
+    &:focus{
+      border-color: ${(props) => props.valid ? '#355DFF' : '#d93737'};
+    }
+    @media screen and (max-width:408px) {
+      height: 60px;
+    }
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+`;
+
+export const InputWrapper = styled(motion.div)`
+width: 100%;
+position: relative;
+
+.label{
+  position: absolute;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: ${(props) => props.animateLabel ? '25%' : '45%'};
+  left: 1.1rem;
+  color: #808191;
+  font-size: .6rem;
+  transition: all .2s ease-in-out;
+  font-weight: 700;
+  .invalid{
+    color: red;
+  }
+}
+input{
+  width: 100%;
+  padding: 1rem 1rem .2rem 1rem;
+  height: ${(props) => props.small ? '60px' : '80px'};
+  background: var(--input-bg-color);
+  outline: none;
+  border-radius: 12px;
+  border: ${(props) => props.valid ? '2px solid rgba(228,228,228,0.1)' : '2px solid #d93737'};
+  color: var(--font-color);
+  font-family: var(--main-font);
+  transition: all .2s ease-in-out;
+  font-weight: bold;
+  font-size: 1rem;
+
+  &:focus{
+    border-color: ${(props) => props.valid ? '#355DFF' : '#d93737'};
+  }
+  @media screen and (max-width:408px) {
+    height: 60px;
+  }
+}
+textarea{
+  width: 100%;
+  padding: 2.5rem 1rem .2rem 1rem;
+  height: 80px;
+  background: var(--input-bg-color);
+  outline: none;
+  border-radius: 12px;
+  border: ${(props) => props.valid ? '2px solid rgba(228,228,228,0.1)' : '2px solid #d93737'};
+  color: var(--font-color);
+  font-family: var(--main-font);
+  transition: all .2s ease-in-out;
+  font-weight: bold;
+  font-size: 1rem;
+  resize: none;
+
+  &:focus{
+    border-color: ${(props) => props.valid ? '#355DFF' : '#d93737'};
+  }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 `;

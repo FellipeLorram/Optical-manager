@@ -4,15 +4,16 @@ import { get } from 'lodash';
 
 import IsLoading from '../../components/Loader/IsLoading';
 import Arrow from '../../components/Svgs/ArrowBack/ArrowLeft';
-import { PageContainer, PageHeader, Delete } from '../../styles/GlobalStyles';
-import Input from './Input';
-import { Container } from './styled';
-import TextArea from './TextArea';
+import {
+  PageContainer, PageHeader, Delete, FormContainer,
+} from '../../styles/GlobalStyles';
+import Input from '../../components/Input/Input';
+import TextArea from '../../styles/GlobalComponents/TextArea';
 import axios from '../../services/axios';
 import history from '../../services/history';
-import Footer from './Footer';
+import Footer from '../../styles/GlobalComponents/Footer';
 import SellsExamsRepairs from './SellsExamsRepairs/SellsExamsRepairs';
-import DeleteClientModal from '../../components/Modal/DeleteClient/DeleteClientModal';
+import DeleteClientModal from '../../Widgets/Modals/DeleteModal/Index';
 
 export default function Client({ match }) {
   const [inline, setInline] = useState(false);
@@ -129,12 +130,25 @@ export default function Client({ match }) {
     history.push(`/client/${id}`);
   };
 
+  const handleDeleteClick = () => {
+    async function Request() {
+      try {
+        await axios.delete(`/clients/${id}`);
+        setModal(false);
+        history.push('/clients');
+      } catch (error) {
+        history.push(`/client/${id}`);
+      }
+    }
+    Request();
+  };
+
   return (
     <PageContainer
       initial={{ x: 50 }}
       animate={{ x: 0 }}
     >
-      <DeleteClientModal id={id} setOnScreen={setModal} onScreen={modal} />
+      <DeleteClientModal handleClick={handleDeleteClick} setOnScreen={setModal} onScreen={modal} />
       <IsLoading loading={loading} />
       <PageHeader>
         <Arrow />
@@ -143,7 +157,7 @@ export default function Client({ match }) {
         )}
 
       </PageHeader>
-      <Container buttonEnd={id}>
+      <FormContainer buttonEnd={id}>
         <div className="row--2">
           <Input inputBlock={inputBlock} setValidText={setIsValidName} type="text" label="NOME" setText={setNome} valid={isValidName} text={nome} />
           <Input inputBlock={inputBlock} setValidText={setIsValidEndereco} type="text" label="ENDEREÇO" setText={setEndereco} valid={isValidEndereco} text={endereco} />
@@ -163,7 +177,7 @@ export default function Client({ match }) {
           handleClickEditButton={handleClickEditButton}
           handleClickSaveButton={handleClickSaveButton}
         />
-      </Container>
+      </FormContainer>
       {
         id && (
           <>

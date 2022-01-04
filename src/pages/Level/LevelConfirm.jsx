@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 
-import { InputWrapper } from '../../styles/GlobalStyles';
 import { Item, LevelSelectContainer } from './styled';
+import Input from '../../components/Input/Input';
 
 const InputVariants = {
   initial: { opacity: 0 },
@@ -33,36 +33,10 @@ export default function LevelConfirm({
   sellerName,
   names,
 }) {
-  const [animateLabel, setAnimateLabel] = useState(false);
-  const handleBlur = () => {
-    if (!text) setAnimateLabel(false);
-  };
-  const handleChange = (value) => {
-    setText(value);
-  };
-
   return (
     <AnimatePresence>
       {level === 'ADMINISTRADOR' && (
-        <InputWrapper
-          variants={InputVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          valid
-          animateLabel={animateLabel}
-        >
-          <div className="label">
-            SENHA DE ADMINISTRADOR
-          </div>
-          <input
-            value={text}
-            onChange={(e) => handleChange(e.target.value)}
-            onBlur={handleBlur}
-            onFocus={() => setAnimateLabel(true)}
-            type="password"
-          />
-        </InputWrapper>
+        <Input label="SENHA DE ADMINISTRADOR" text={text} setText={setText} valid />
       )}
       {level === 'VENDEDOR' && (
         <SelectNames

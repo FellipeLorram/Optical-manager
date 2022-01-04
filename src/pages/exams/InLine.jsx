@@ -46,7 +46,7 @@ export default function InLine() {
           </ContainerGrid>
         </>
       ) : (
-        <div className="no-content">NÃO HÁ CLIENTES NA FILA DE EXAME</div>
+        <div className="no-content">Não há clientes na fila de exame</div>
       )}
     </AnimatePresence>
   );

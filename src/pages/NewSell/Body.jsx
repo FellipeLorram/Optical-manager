@@ -5,19 +5,19 @@ import { useSelector } from 'react-redux';
 
 import history from '../../services/history';
 import axios from '../../services/axios';
-import Input from './Input';
-import InputSign from './InputSign';
-import { BodyContainer, SelectModal } from './styled';
-import { Button } from '../../styles/GlobalStyles';
-import Frames from '../../components/Modal/Frames/FramesModal';
-import Lens from '../../components/Modal/Lens/LensModal';
-import ContactLenses from '../../components/Modal/ContactLenses/ContactLensModal';
+import Input from '../../components/Input/Input';
+import InputSign from '../../styles/GlobalComponents/InputSign';
+import { SelectModal } from './styled';
+import { Button, FormBodyContainer } from '../../styles/GlobalStyles';
+import Frames from '../../Widgets/Modals/Frames/Index';
+import Lens from '../../Widgets/Modals/Lens/Index';
+import ContactLenses from '../../Widgets/Modals/ContactLenses/Index';
 import Payments from './Payments';
-import ButtonHandle from './ButtonsHandle';
+import ButtonHandle from '../../styles/GlobalComponents/ButtonsHandle';
 import { FormatDate, save } from './fuctions';
-import PaymentModal from '../../components/Modal/PaymentsModal/PaymentModal';
+import PaymentModal from '../../Widgets/Modals/PaymentsModal/PaymentModal';
 import IsLoading from '../../components/Loader/IsLoading';
-import PdfModal from '../../components/Modal/PdfModal/Index';
+import PdfModal from '../../Widgets/Modals/PdfModal/Index';
 
 export default function Body({ id, sellid }) {
   const randomOs = Math.floor(Math.random() * (2000 - 1)) + 1;
@@ -308,7 +308,7 @@ export default function Body({ id, sellid }) {
   };
 
   return (
-    <BodyContainer>
+    <FormBodyContainer>
       <IsLoading loading={loading} />
       <Frames
         setValueFrame={setValorArm}
@@ -375,7 +375,7 @@ export default function Body({ id, sellid }) {
         <Input inputBlock={inputBlock} label="ADIÇÃO" valid={isValidAdicao} setValidText={setIsValidAdicao} setText={setAdicao} text={adicao} type="number" />
       </div>
       {lastExamData && !sellId && (
-        <div className="container-start">
+        <div className="input--container--start">
           <Button onClick={handleLastExamClick}>UTILIZAR DADOS DA ULTIMA CONSULTA</Button>
         </div>
       )}
@@ -455,16 +455,16 @@ export default function Body({ id, sellid }) {
         handleAddPaymentClick={handleAddPaymentClick}
         setOnScreen={setModalAddPaymentsOnScreen}
       />
-      <div className="container-start">
+      <div className="input--container--start">
         <Button onClick={() => setModalPdfOnScreen(true)}>GERAR PDF</Button>
       </div>
       <ButtonHandle
         inputBlock={inputBlock}
         setInputBlock={setInputBlock}
-        sellId={sellId}
+        id={sellId}
         handleAddSaveClick={handleAddSaveClick}
       />
-    </BodyContainer>
+    </FormBodyContainer>
   );
 }
 

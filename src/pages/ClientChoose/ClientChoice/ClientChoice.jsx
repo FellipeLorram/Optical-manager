@@ -28,10 +28,13 @@ export default function ClientChoice({ match }) {
   useEffect(() => {
     if (location === '/new-sell') {
       setText({ headerText: 'NOVA VENDA', askQuestion: 'Quem está fazendo está compra?' });
+      return;
     }
     if (location === '/new-exam') {
       setText({ headerText: 'NOVO EXAME', askQuestion: 'Quem está fazendo este exame?' });
+      return;
     }
+    setText({ headerText: 'NOVO CONSERTO', askQuestion: 'Quem está fazendo este conserto?' });
   }, [location]);
 
   return (

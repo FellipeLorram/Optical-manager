@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import IsLoading from '../../components/Loader/IsLoading';
-import AddLens from '../../components/Modal/AddLens/AddLens';
+import AddLens from '../../Widgets/Modals/AddLens/Index';
 import Arrow from '../../components/Svgs/ArrowBack/ArrowLeft';
 import axios from '../../services/axios';
 import history from '../../services/history';

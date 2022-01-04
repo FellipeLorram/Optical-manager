@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import CurrencyFormat from 'react-currency-format';
-import { Container } from './styled';
+import { Container } from '../styled';
 import history from '../../../services/history';
 
 const cardVariants = {

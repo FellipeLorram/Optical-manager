@@ -10,7 +10,7 @@ import {
   Container,
   LoginContainer,
 } from './styled';
-import Input from './Input';
+import Input from '../../components/Input/Input';
 import Promotion from './Promotion';
 import { Button } from '../../styles/GlobalStyles';
 import IsLoading from '../../components/Loader/IsLoading';

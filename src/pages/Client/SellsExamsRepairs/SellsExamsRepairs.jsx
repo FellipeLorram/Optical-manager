@@ -37,6 +37,10 @@ export default function SellsExamsRepairs({ data }) {
         history.push(`/new-exam/${data.id}`);
         break;
 
+      case 'repair':
+        history.push(`/new-repair/${data.id}`);
+        break;
+
       default:
         break;
     }
@@ -80,7 +84,14 @@ export default function SellsExamsRepairs({ data }) {
             </Button>
           </>
         )}
-        {repairs && (<Button>NOVO CONSERTO</Button>)}
+        {repairs && (
+          <Button
+            onClick={() => handleButtonClick('repair')}
+          >
+            NOVO CONSERTO
+
+          </Button>
+        )}
       </div>
       <AnimatePresence>
         <Sells key={0} sells={sells} id={data.id} data={data.sells} />

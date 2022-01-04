@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { Container } from './styled';
-import { ContainerGrid, InputWrapper } from '../../../styles/GlobalStyles';
+import { ContainerGrid } from '../../../styles/GlobalStyles';
 import SearchTypeSelect from './SearchTypeSelect';
 import ClientsCard from '../../../components/Card/ClientsCard/ClientsCard';
+import Input from '../../../components/Input/Input';
 
 const variants = {
   initial: {
@@ -24,7 +25,6 @@ export default function Search({ onScreen, data }) {
   const [types, setTypes] = useState(['NOME']);
   const [searchType, setSearchType] = useState('CPF');
   const [text, setText] = useState('');
-  const [animateLabel, setAnimateLabel] = useState(false);
   const [inputType, setInputType] = useState('text');
 
   useEffect(() => {
@@ -32,18 +32,6 @@ export default function Search({ onScreen, data }) {
     else setInputType('number');
     setText('');
   }, [searchType]);
-
-  useEffect(() => {
-    if (text) setAnimateLabel(true);
-  }, [text]);
-
-  const handleBlur = () => {
-    if (!text) setAnimateLabel(false);
-  };
-
-  const handleChange = (value) => {
-    setText(value);
-  };
 
   return (
     <>
@@ -55,21 +43,7 @@ export default function Search({ onScreen, data }) {
             animate="animate"
             exit="exit"
           >
-            <InputWrapper
-              valid
-              animateLabel={animateLabel}
-            >
-              <div className="label">
-                <span>BUSCAR CLIENTE</span>
-              </div>
-              <input
-                value={text}
-                onChange={(e) => handleChange(e.target.value)}
-                onBlur={handleBlur}
-                onFocus={() => setAnimateLabel(true)}
-                type={inputType}
-              />
-            </InputWrapper>
+            <Input label="BUSCAR CLIENTE" valid text={text} setText={setText} type={inputType} />
             <SearchTypeSelect
               types={types}
               setTypes={setTypes}

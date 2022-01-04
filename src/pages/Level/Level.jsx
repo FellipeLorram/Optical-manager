@@ -5,7 +5,7 @@ import * as actions from '../../store/modules/auth/actions';
 import axios from '../../services/axios';
 import { Button } from '../../styles/GlobalStyles';
 import LevelConfirm from './LevelConfirm';
-import LevelSelect from './LevelSelect';
+import LevelSelect from '../../components/Select/Index';
 import {
   Container,
   LevelContainer,
@@ -61,7 +61,12 @@ export default function Level() {
           Quem está utilizando o sistema?
         </div>
         <div className="body">
-          <LevelSelect level={level} setLevel={setLevel} levels={levels} setLevels={setLevels} />
+          <LevelSelect
+            level={level}
+            setLevels={setLevel}
+            currentLevelsArr={levels}
+            setCurrentLevelsArr={setLevels}
+          />
           <LevelConfirm
             names={names}
             sellerName={sellerName}

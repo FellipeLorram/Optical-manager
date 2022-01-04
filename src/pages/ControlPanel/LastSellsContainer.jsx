@@ -13,7 +13,7 @@ export default function LastSellsContainer({ data }) {
         </div>
       </RowContainer>
       <CardsContainer>
-        {data.length ? data.map((sells) => (
+        {data && data.length > 0 ? data.map((sells) => (
           <Card key={sells.sell._id} data={sells} />
         )) : (
           <div className="no-data">Não há vendas no sistema</div>
@@ -24,6 +24,10 @@ export default function LastSellsContainer({ data }) {
   );
 }
 
+LastSellsContainer.defaultProps = {
+  data: [],
+};
+
 LastSellsContainer.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.array,
 };

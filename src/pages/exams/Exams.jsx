@@ -47,7 +47,7 @@ export default function Exams() {
           </ContainerGrid>
         </>
       ) : (
-        <div className="no-content">NÃO HÁ EXAMES NO SISTEMA</div>
+        <div className="no-content">Não há exames no sistema</div>
       )}
     </PageContainer>
   );

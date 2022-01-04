@@ -32,9 +32,13 @@ export default function Clients() {
         </AddButton>
       </PageHeader>
       <ContainerGrid>
-        {data.map((clients) => (
+        {data.length > 0 ? data.map((clients) => (
           <ClientsCard key={clients._id} data={clients} />
-        ))}
+        )) : (
+          <div className="no-content">
+            Não há clientes no sistema.
+          </div>
+        )}
       </ContainerGrid>
     </PageContainer>
   );

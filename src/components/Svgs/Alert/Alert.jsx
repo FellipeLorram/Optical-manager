@@ -22,7 +22,7 @@ export default function Alert() {
       height="44"
       viewBox="0 0 24 24"
       strokeWidth="1.5"
-      stroke="#d93737"
+      stroke="rgba(187, 128, 9, 0.8)"
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
