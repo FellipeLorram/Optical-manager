@@ -96,12 +96,13 @@ export default function Select({
 }
 
 Select.defaultProps = {
+  level: '',
   edit: false,
   setOriginalCurrentText: (text) => text,
 };
 
 Select.propTypes = {
-  level: PropTypes.string.isRequired,
+  level: PropTypes.string,
   setLevels: PropTypes.func.isRequired,
   currentLevelsArr: PropTypes.array.isRequired,
   setCurrentLevelsArr: PropTypes.func.isRequired,

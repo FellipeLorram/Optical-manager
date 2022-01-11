@@ -62,7 +62,7 @@ ModalComponent.defaultProps = {
 ModalComponent.propTypes = {
   onScreen: PropTypes.bool.isRequired,
   setOnScreen: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node.isRequired,
   Lg: PropTypes.bool,
 };
 

@@ -1,16 +1,23 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
+import * as actions from '../../store/modules/auth/actions';
 import Account from '../../components/Svgs/Configs Buttons/Account';
 import Logout from '../../components/Svgs/Configs Buttons/Logout';
 import Notifications from '../../components/Svgs/Configs Buttons/Notifications';
 import { ContainerGrid, LinkButtonSvg, PageContainer } from '../../styles/GlobalStyles';
 
 export default function Configs() {
+  const dispatch = useDispatch();
   const buttons = [
     { text: 'MINHA CONTA', svg: Account(), to: '/config/account' },
     { text: 'NOTIFICAÇÔES', svg: Notifications(), to: '/config/notifications' },
-    { text: 'SAIR', svg: Logout(), to: '/config/logout' },
   ];
+
+  const handleLogoutClick = (e) => {
+    e.preventDefault();
+    dispatch(actions.loginFailure());
+  };
 
   return (
     <PageContainer
@@ -27,6 +34,12 @@ export default function Configs() {
             <span>{button.text}</span>
           </LinkButtonSvg>
         ))}
+        <LinkButtonSvg onClick={handleLogoutClick} to="/logout">
+          <span className="icon--container">
+            <Logout />
+          </span>
+          <span>SAIR</span>
+        </LinkButtonSvg>
       </ContainerGrid>
     </PageContainer>
   );

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import history from '../../services/history';
 import axios from '../../services/axios';
 import Input from '../../components/Input/Input';
-import InputSign from '../../styles/GlobalComponents/InputSign';
+import InputSign from '../../components/Input/InputSign';
 import { SelectModal } from './styled';
 import { Button, FormBodyContainer } from '../../styles/GlobalStyles';
 import Frames from '../../Widgets/Modals/Frames/Index';

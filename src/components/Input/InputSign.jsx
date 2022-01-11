@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { InputSignWrapper } from '../GlobalStyles';
+import { InputSignWrapper } from './styled';
 
 export default function InputSign({
   label, text, type, valid, setText, setValidText, inputBlock, sign, setSign, cil,

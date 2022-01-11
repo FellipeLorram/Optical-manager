@@ -20,6 +20,7 @@ width: 100%;
   flex-direction: column;
   gap: 1rem;
   color: #C9D1D9;
+  text-align: center;
   span{
     line-height: 1rem;
   }

@@ -9,8 +9,13 @@ const spring = {
   damping: 30,
 };
 
-export default function Switch({ label, isOn, setIsOn }) {
-  const toggleSwitch = () => setIsOn(!isOn);
+export default function Switch({
+  label,
+  isOn,
+  setIsOn,
+  block,
+}) {
+  const toggleSwitch = () => !block && setIsOn(!isOn);
 
   return (
     <SwitchContainer isOn={isOn}>
@@ -28,8 +33,13 @@ export default function Switch({ label, isOn, setIsOn }) {
   );
 }
 
+Switch.defaultProps = {
+  block: false,
+};
+
 Switch.propTypes = {
   label: PropTypes.string.isRequired,
+  block: PropTypes.bool,
   isOn: PropTypes.bool.isRequired,
   setIsOn: PropTypes.func.isRequired,
 };

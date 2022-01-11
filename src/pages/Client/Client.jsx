@@ -8,7 +8,7 @@ import {
   PageContainer, PageHeader, Delete, FormContainer,
 } from '../../styles/GlobalStyles';
 import Input from '../../components/Input/Input';
-import TextArea from '../../styles/GlobalComponents/TextArea';
+import TextArea from '../../components/Input/TextArea';
 import axios from '../../services/axios';
 import history from '../../services/history';
 import Footer from '../../styles/GlobalComponents/Footer';

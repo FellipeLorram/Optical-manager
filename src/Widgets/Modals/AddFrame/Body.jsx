@@ -6,7 +6,7 @@ import Input from '../../../components/Input/Input';
 import SexTypeSelect from '../../../components/Select/Index';
 
 export default function Body({ content }) {
-  const [types, setTypes] = useState('');
+  const [types, setTypes] = useState(content.sex);
   const [sexTypes, setSexTypes] = useState([]);
 
   useEffect(() => {

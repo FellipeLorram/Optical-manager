@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { InputWrapper } from '../GlobalStyles';
+import { InputWrapper } from './styled';
 
 export default function TextArea({
   label, text, type, valid, setText, inputBlock,

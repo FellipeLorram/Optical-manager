@@ -39,7 +39,7 @@ export default function Repairs() {
 
         <ContainerGrid>
           {data.map((seller) => (
-            <SellerCard data={seller} />
+            <SellerCard data={seller} key={seller._id} />
           ))}
         </ContainerGrid>
 

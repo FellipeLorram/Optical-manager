@@ -42,7 +42,7 @@ export default function Body({ content }) {
           currentLevelsArr={lensTypes}
           setCurrentLevelsArr={setLensTypes}
           edit={content.edit}
-          setOriginalType={content.setType}
+          setOriginalCurrentText={content.setType}
         />
       </div>
     </BodyContainer>

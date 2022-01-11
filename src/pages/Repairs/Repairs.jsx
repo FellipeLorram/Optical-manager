@@ -16,9 +16,8 @@ export default function Repairs() {
     async function getData() {
       const response = await axios.get('/clients/concerts/all');
       setData(response.data);
-      setTimeout(() => setLoading(false), 200);
+      setLoading(false);
     }
-
     getData();
   }, []);
   return (
@@ -30,8 +29,8 @@ export default function Repairs() {
       {data.length > 0 ? (
 
         <ContainerGrid>
-          {data.map((Exam) => (
-            <RepairCard key={Exam.nome} data={Exam} />
+          {data.map((repair) => (
+            <RepairCard key={repair.repair._id} data={repair} />
           ))}
         </ContainerGrid>
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
 
@@ -31,6 +31,25 @@ export default function Repair({ match }) {
   const id = get(match, 'params.id', '');
   const repairId = get(match, 'params.repairid', '');
 
+  useEffect(() => {
+    if (!repairId) return;
+    async function request() {
+      try {
+        const { data } = await axios.get(`/clients/${id}/concerts/${repairId}`);
+
+        setTipo(data.tipo);
+        setValor(data.valor);
+        // setPago(data.pago);
+        // setEntregue(data.entregue);
+        setInputBlock(true);
+        setEditButton(true);
+      } catch (error) {
+        history.push('/repairs');
+      }
+    }
+    request();
+  }, [repairId, id]);
+
   const handleDeleteClick = () => {
     async function Request() {
       try {
@@ -54,13 +73,36 @@ export default function Repair({ match }) {
   };
 
   const handleClickSaveButton = () => {
-    function saveRequest() { }
+    async function saveRequest() {
+      try {
+        if (!repairId) {
+          const { data } = await axios.post(`/clients/${id}/new-concert`, {
+            tipo,
+            valor,
+            pago,
+            entregue,
+          });
+          history.push(`/repair/${id}/${data._id}`);
+        } else {
+          await axios.put(`/clients/${id}/concerts/${repairId}`, {
+            tipo,
+            valor,
+            pago,
+            entregue,
+          });
+        }
+        handleClickCancelButton();
+      } catch (error) {
+        history.push('/repairs');
+      }
+    }
     saveRequest();
   };
 
   return (
     <PageContainer>
       <DeleteRepairModal
+        deleteText="Ao deletar esse conserto, você perderá todas as informações sobre o mesmo."
         onScreen={deleteModalOnScreen}
         setOnScreen={setDeleteModalOnScreen}
         handleClick={handleDeleteClick}
@@ -73,12 +115,12 @@ export default function Repair({ match }) {
 
       <FormContainer buttonEnd style={{ marginTop: '15px' }}>
         <div className="row--2">
-          <Input inputBlock={inputBlock} label="CONSERTO" text={tipo} setText={setTipo} valid />
-          <Input inputBlock={inputBlock} label="VALOR" text={valor} setText={setValor} valid />
+          <Input inputBlock={inputBlock} label="CONSERTO" text={tipo} setText={setTipo} valid type="text" />
+          <Input inputBlock={inputBlock} label="VALOR" text={valor} setText={setValor} valid type="number" />
         </div>
         <div className="row--start">
-          <Switch label="PAGO" isOn={pago} setIsOn={setPago} />
-          <Switch label="ENTREGUE" isOn={entregue} setIsOn={setEntregue} />
+          <Switch block={inputBlock} label="PAGO" isOn={pago} setIsOn={setPago} />
+          <Switch block={inputBlock} label="ENTREGUE" isOn={entregue} setIsOn={setEntregue} />
         </div>
 
         <Footer

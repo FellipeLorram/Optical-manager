@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { Container } from './styled';
+import { Container, LevelSelectContainer } from './styled';
 import { ContainerGrid } from '../../../styles/GlobalStyles';
-import SearchTypeSelect from './SearchTypeSelect';
 import ClientsCard from '../../../components/Card/ClientsCard/ClientsCard';
 import Input from '../../../components/Input/Input';
 
@@ -22,7 +21,6 @@ const variants = {
 };
 
 export default function Search({ onScreen, data }) {
-  const [types, setTypes] = useState(['NOME']);
   const [searchType, setSearchType] = useState('CPF');
   const [text, setText] = useState('');
   const [inputType, setInputType] = useState('text');
@@ -32,6 +30,11 @@ export default function Search({ onScreen, data }) {
     else setInputType('number');
     setText('');
   }, [searchType]);
+
+  const handleSearchClick = () => {
+    if (searchType === 'CPF') setSearchType('NOME');
+    else setSearchType('CPF');
+  };
 
   return (
     <>
@@ -44,17 +47,17 @@ export default function Search({ onScreen, data }) {
             exit="exit"
           >
             <Input label="BUSCAR CLIENTE" valid text={text} setText={setText} type={inputType} />
-            <SearchTypeSelect
-              types={types}
-              setTypes={setTypes}
-              searchType={searchType}
-              setSearchType={setSearchType}
-            />
+            <LevelSelectContainer onClick={handleSearchClick}>
+              {searchType}
+            </LevelSelectContainer>
           </Container>
           <ContainerGrid noP>
-            {data.map((clients) => (
-              <ClientsCard key={clients._id} data={clients} />
-            ))}
+            {data
+              .filter((clients) => clients[searchType.toLocaleLowerCase()].toLowerCase()
+                .startsWith(text.toLocaleLowerCase()))
+              .map((clients) => (
+                <ClientsCard key={clients._id} data={clients} />
+              ))}
           </ContainerGrid>
         </>
       )}

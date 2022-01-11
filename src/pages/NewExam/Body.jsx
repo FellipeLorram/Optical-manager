@@ -5,7 +5,7 @@ import history from '../../services/history';
 import axios from '../../services/axios';
 import { FormBodyContainer } from '../../styles/GlobalStyles';
 import Input from '../../components/Input/Input';
-import InputSign from '../../styles/GlobalComponents/InputSign';
+import InputSign from '../../components/Input/InputSign';
 import ButtonsHandle from '../../styles/GlobalComponents/ButtonsHandle';
 
 export default function Body({ id, examId }) {

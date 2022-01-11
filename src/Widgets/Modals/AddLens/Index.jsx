@@ -39,7 +39,6 @@ export default function AddLens({
             name, price, type,
           });
         }
-
         setOnScreen(false);
       } catch (error) {
         history.push('/office');
