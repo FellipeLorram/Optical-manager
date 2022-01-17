@@ -6,7 +6,7 @@ import Sells from './Sells';
 import Exams from './Exams';
 import Repairs from './Repairs';
 import { Container, CurrentText } from './styled';
-import { Button } from '../../../styles/GlobalStyles';
+import Button from '../../../components/Buttons/Index';
 import axios from '../../../services/axios';
 import history from '../../../services/history';
 

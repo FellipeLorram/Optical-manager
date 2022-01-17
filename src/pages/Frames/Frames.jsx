@@ -5,8 +5,9 @@ import IsLoading from '../../components/Loader/IsLoading';
 import Arrow from '../../components/Svgs/ArrowBack/ArrowLeft';
 import axios from '../../services/axios';
 import history from '../../services/history';
+import Button from '../../components/Buttons/Index';
 import {
-  Button, ContainerGrid, PageContainer, PageHeader,
+  ContainerGrid, PageContainer, PageHeader,
 } from '../../styles/GlobalStyles';
 import Frame from './Frame';
 

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import LastSellCard from '../../components/Card/ControlPannelCard/LastSellCard';
 import IsLoading from '../../components/Loader/IsLoading';
 import axios from '../../services/axios';
+import Button from '../../components/Buttons/Index';
 import {
-  AddButton,
   ContainerGrid,
   PageContainer,
   PageHeader,
@@ -28,7 +28,7 @@ export default function Sells() {
     >
       <IsLoading loading={loading} />
       <PageHeader>
-        <AddButton to="/new-sell">NOVA VENDA</AddButton>
+        <Button type="link" to="/new-sell">NOVA VENDA</Button>
       </PageHeader>
       <ContainerGrid>
         {data.length > 0 ? (

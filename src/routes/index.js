@@ -52,7 +52,6 @@ export default function Routes() {
             <MyRoute exact path="/new-repair/:id" component={Repair} isClosed />
             <MyRoute exact path="/repair/:id/:repairid" component={Repair} isClosed />
             <MyRoute exact path="/sells" component={Sells} isClosed />
-            <MyRoute exact path="/sells" component={Sells} isClosed />
             <MyRoute exact path="/exams" component={Exams} isClosed />
             <MyRoute exact path="/repairs" component={Repairs} isClosed />
             <MyRoute exact path="/configs" component={Configs} isClosed />

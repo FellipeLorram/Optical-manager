@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import RepairCard from '../../components/Card/RepairCard/RepairCard';
 import IsLoading from '../../components/Loader/IsLoading';
 import axios from '../../services/axios';
+import Button from '../../components/Buttons/Index';
 import {
-  AddButton,
   ContainerGrid,
   PageContainer,
   PageHeader,
@@ -24,7 +24,7 @@ export default function Repairs() {
     <PageContainer>
       <IsLoading loading={loading} />
       <PageHeader>
-        <AddButton to="/new-repair">NOVO CONSERTO</AddButton>
+        <Button type="link" to="/new-repair">NOVO CONSERTO</Button>
       </PageHeader>
       {data.length > 0 ? (
 

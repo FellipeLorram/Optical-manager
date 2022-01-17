@@ -18,55 +18,6 @@ export const ButtonsContainer = styled(motion.div)`
   }
 `;
 
-export const LinkButton = styled(Link)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
-  font-size: 1rem;
-  color: var(--font-color);
-  text-decoration: none;
-  background: #242731;
-  border-radius: 12px;
-  width: 100%;
-  box-shadow: 0 15px 35px rgb(0 0 0 / 7%);
-  transition: all .15s ease-in-out;
-  border: 1px solid transparent;
-  min-width: 128px;
-
-  span{
-    padding: .5rem;
-    font-weight: 700;
-  }
-  .icon--container{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: .5rem;
-    svg{
-      width: 100%;
-      height: 3rem;
-    }
-  }
-  &:hover{
-    border: 1px solid #355DFF;
-  }
-  @media screen and (max-width:768px) {
-    padding: .5rem;
-    gap: .5rem;
-    font-size: .6rem;
-    .icon--container{
-      svg{
-        width: 100%;
-        height: 2rem;
-      }
-    }
-  }
-`;
-
 export const RowContainer = styled.div`
   display: flex;
   align-items: center;

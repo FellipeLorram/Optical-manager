@@ -6,8 +6,9 @@ import NewClient from './NewClient';
 import Search from '../Search/Search';
 
 import { ChoiceContainer, CurrentText } from './styled';
+import history from '../../../services/history';
 
-export default function CurrentContent({ data }) {
+export default function CurrentContent({ data, location }) {
   const [search, setSearch] = useState(true);
   const [newClient, setNewClient] = useState(false);
   const handleClick = (set, value) => {
@@ -15,6 +16,19 @@ export default function CurrentContent({ data }) {
     setNewClient(false);
     set(!value);
   };
+
+  const handleClickFunction = (id) => {
+    if (location === '/new-sell') {
+      history.push(`/new-sell/${id}`);
+      return;
+    }
+    if (location === '/new-exam') {
+      history.push(`/new-exam/${id}`);
+      return;
+    }
+    history.push(`/new-repair/${id}`);
+  };
+
   return (
     <>
       <ChoiceContainer>
@@ -32,7 +46,7 @@ export default function CurrentContent({ data }) {
         </CurrentText>
       </ChoiceContainer>
       <AnimatePresence>
-        <Search key="search" data={data} onScreen={search} />
+        <Search key="search" data={data} onScreen={search} handleClickFunction={handleClickFunction} />
         <NewClient key="new-client" onScreen={newClient} />
       </AnimatePresence>
     </>
@@ -41,4 +55,5 @@ export default function CurrentContent({ data }) {
 
 CurrentContent.propTypes = {
   data: PropTypes.array.isRequired,
+  location: PropTypes.string.isRequired,
 };

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import CurrencyFormat from 'react-currency-format';
-import { useSelector } from 'react-redux';
 
 import history from '../../services/history';
 import axios from '../../services/axios';
 import Input from '../../components/Input/Input';
 import InputSign from '../../components/Input/InputSign';
 import { SelectModal } from './styled';
-import { Button, FormBodyContainer } from '../../styles/GlobalStyles';
+import Button from '../../components/Buttons/Index';
+import { FormBodyContainer } from '../../styles/GlobalStyles';
 import Frames from '../../Widgets/Modals/Frames/Index';
 import Lens from '../../Widgets/Modals/Lens/Index';
 import ContactLenses from '../../Widgets/Modals/ContactLenses/Index';

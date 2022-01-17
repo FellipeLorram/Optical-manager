@@ -12,7 +12,7 @@ import {
 } from './styled';
 import Input from '../../components/Input/Input';
 import Promotion from './Promotion';
-import { Button } from '../../styles/GlobalStyles';
+import Button from '../../components/Buttons/Index';
 import IsLoading from '../../components/Loader/IsLoading';
 import Logo from '../../components/Svgs/Logo';
 

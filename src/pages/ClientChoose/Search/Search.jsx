@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
+
 import React, { useEffect, useState } from 'react';
 import { Container, LevelSelectContainer } from './styled';
 import { ContainerGrid } from '../../../styles/GlobalStyles';
 import ClientsCard from '../../../components/Card/ClientsCard/ClientsCard';
 import Input from '../../../components/Input/Input';
+import history from '../../../services/history';
 
 const variants = {
   initial: {
@@ -20,7 +23,7 @@ const variants = {
   },
 };
 
-export default function Search({ onScreen, data }) {
+export default function Search({ onScreen, data, handleClickFunction }) {
   const [searchType, setSearchType] = useState('CPF');
   const [text, setText] = useState('');
   const [inputType, setInputType] = useState('text');
@@ -56,7 +59,11 @@ export default function Search({ onScreen, data }) {
               .filter((clients) => clients[searchType.toLocaleLowerCase()].toLowerCase()
                 .startsWith(text.toLocaleLowerCase()))
               .map((clients) => (
-                <ClientsCard key={clients._id} data={clients} />
+                <ClientsCard
+                  key={clients._id}
+                  data={clients}
+                  handleClickFunction={handleClickFunction}
+                />
               ))}
           </ContainerGrid>
         </>
@@ -68,4 +75,5 @@ export default function Search({ onScreen, data }) {
 Search.propTypes = {
   onScreen: PropTypes.bool.isRequired,
   data: PropTypes.array.isRequired,
+  handleClickFunction: PropTypes.func.isRequired,
 };

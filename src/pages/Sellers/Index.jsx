@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import RepairCard from '../../components/Card/RepairCard/RepairCard';
 import SellerCard from '../../components/Card/SellersCard/Index';
 import IsLoading from '../../components/Loader/IsLoading';
 import axios from '../../services/axios';
 import history from '../../services/history';
+import Button from '../../components/Buttons/Index';
+
 import {
-  AddButton,
   ContainerGrid,
-  Delete,
   PageContainer,
   PageHeader,
 } from '../../styles/GlobalStyles';
@@ -33,7 +32,7 @@ export default function Repairs() {
     <PageContainer>
       <IsLoading loading={loading} />
       <PageHeader>
-        <AddButton to="/officce/new-seller">CADASTRAR VENDEDOR</AddButton>
+        <Button type="link" to="/officce/new-seller">CADASTRAR VENDEDOR</Button>
       </PageHeader>
       {data.length > 0 ? (
 

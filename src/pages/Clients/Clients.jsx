@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
+import Button from '../../components/Buttons/Index';
 import ClientsCard from '../../components/Card/ClientsCard/ClientsCard';
 import axios from '../../services/axios';
+import history from '../../services/history';
 import IsLoading from '../../components/Loader/IsLoading';
 import {
   ContainerGrid,
-  AddButton,
   PageContainer,
   PageHeader,
 } from '../../styles/GlobalStyles';
@@ -27,13 +28,13 @@ export default function Clients() {
     <PageContainer>
       <IsLoading loading={loading} />
       <PageHeader>
-        <AddButton to="/new-client">
+        <Button type="link" to="/new-client">
           NOVO CLIENTE
-        </AddButton>
+        </Button>
       </PageHeader>
       <ContainerGrid>
         {data.length > 0 ? data.map((clients) => (
-          <ClientsCard key={clients._id} data={clients} />
+          <ClientsCard key={clients._id} data={clients} handleClickFunction={(id) => history.push(`/client/${id}`)} />
         )) : (
           <div className="no-content">
             Não há clientes no sistema.

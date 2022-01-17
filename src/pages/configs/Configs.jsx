@@ -5,7 +5,8 @@ import * as actions from '../../store/modules/auth/actions';
 import Account from '../../components/Svgs/Configs Buttons/Account';
 import Logout from '../../components/Svgs/Configs Buttons/Logout';
 import Notifications from '../../components/Svgs/Configs Buttons/Notifications';
-import { ContainerGrid, LinkButtonSvg, PageContainer } from '../../styles/GlobalStyles';
+import { ContainerGrid, PageContainer } from '../../styles/GlobalStyles';
+import Button from '../../components/Buttons/Index';
 
 export default function Configs() {
   const dispatch = useDispatch();
@@ -27,19 +28,19 @@ export default function Configs() {
     >
       <ContainerGrid>
         {buttons.map((button) => (
-          <LinkButtonSvg key={button.to} to={button.to}>
+          <Button type="svg-link" key={button.to} to={button.to}>
             <span className="icon--container">
               {button.svg}
             </span>
             <span>{button.text}</span>
-          </LinkButtonSvg>
+          </Button>
         ))}
-        <LinkButtonSvg onClick={handleLogoutClick} to="/logout">
+        <Button type="svg-link" onClick={handleLogoutClick} to="/logout">
           <span className="icon--container">
             <Logout />
           </span>
           <span>SAIR</span>
-        </LinkButtonSvg>
+        </Button>
       </ContainerGrid>
     </PageContainer>
   );

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AnimatePresence } from 'framer-motion';
-import { LinkButton } from '../../../styles/GlobalStyles';
+import Button from '../../../components/Buttons/Index';
 
 const variants = {
   initial: {
@@ -22,9 +21,9 @@ export default function NewClient({ onScreen }) {
   return (
     <>
       {onScreen && (
-        <LinkButton to="/new-client">
+        <Button type="link" to="/new-client">
           NOVO CLIENTE
-        </LinkButton>
+        </Button>
       )}
     </>
   );

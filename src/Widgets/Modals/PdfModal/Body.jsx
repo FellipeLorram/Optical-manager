@@ -6,7 +6,7 @@ import { BodyContainer, FooterContainer } from '../../../components/Modal/styled
 import Switch from './Switch';
 import { SwitchContainer } from './styled';
 import Paper from './Paper';
-import { Button } from '../../../styles/GlobalStyles';
+import Button from '../../../components/Buttons/Index';
 import Pdf from '../../../components/GeneratePdf/Index';
 
 export default function Body({

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { OtherOptionContainer } from '../../../components/Modal/styled';
 import Input from '../../../components/Input/Input';
-import { Button } from '../../../styles/GlobalStyles';
+import Button from '../../../components/Buttons/Index';
 
 export default function OtherFrame({
   setFrame, setOnScreen,

@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Button } from '../GlobalStyles';
+import Button from '../../components/Buttons/Index';
 import Switch from './Switch';
 
 export default function Footer({

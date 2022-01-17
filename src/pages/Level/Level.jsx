@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import * as actions from '../../store/modules/auth/actions';
 import axios from '../../services/axios';
-import { Button } from '../../styles/GlobalStyles';
+import Button from '../../components/Buttons/Index';
 import LevelConfirm from './LevelConfirm';
 import LevelSelect from '../../components/Select/Index';
 import {

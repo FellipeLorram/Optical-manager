@@ -54,7 +54,7 @@ export default function ClientChoice({ match }) {
         <div className="header">
           {text.askQuestion}
         </div>
-        <CurrentContent data={data} />
+        <CurrentContent location={location} data={data} />
       </Container>
     </PageContainer>
   );

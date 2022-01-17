@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button } from '../../../styles/GlobalStyles';
+import Button from '../../../components/Buttons/Index';
 import { FooterContainer } from '../../../components/Modal/styled';
 
 export default function Footer({ handleClick, setOnScreen }) {

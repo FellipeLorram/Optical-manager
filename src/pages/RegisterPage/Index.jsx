@@ -4,7 +4,7 @@ import { isEmail } from 'validator';
 
 import axios from '../../services/axios';
 import history from '../../services/history';
-import { Button } from '../../styles/GlobalStyles';
+import Button from '../../components/Buttons/Index';
 import Input from '../../components/Input/Input';
 import { PageContainer, RegisterContainer } from './styled';
 

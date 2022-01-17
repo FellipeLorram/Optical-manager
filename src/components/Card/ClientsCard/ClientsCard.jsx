@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Choice, Container } from './styled';
 import CardCurrentContent from './CardCurrentContent';
 import { setContent, setDataExam, setDataSell } from '../../../functions/clientsPage/setData';
-import history from '../../../services/history';
 
 const cardVariants = {
   initial: {
@@ -19,7 +18,7 @@ const cardVariants = {
   },
 };
 
-function ClientsCardComponent({ data }) {
+function ClientsCardComponent({ data, handleClickFunction }) {
   const [current, setCurrent] = useState(true);
   const [sellSelect, setSellSelect] = useState(true);
   const [examSelect, setExamSelect] = useState(false);
@@ -37,13 +36,9 @@ function ClientsCardComponent({ data }) {
     setCurrent(value);
   };
 
-  const handleClickContainer = (e) => {
-    history.push(`/client/${data._id}`);
-  };
-
   return (
     <Container
-      onClick={(e) => handleClickContainer(e)}
+      onClick={(e) => handleClickFunction(data._id)}
       variants={cardVariants}
       initial="initial"
       animate="animate"
@@ -71,8 +66,13 @@ function ClientsCardComponent({ data }) {
   );
 }
 
+ClientsCardComponent.defaultProps = {
+  handleClickFunction: () => false,
+};
+
 ClientsCardComponent.propTypes = {
   data: PropTypes.object.isRequired,
+  handleClickFunction: PropTypes.func,
 };
 
 const ClientsCard = memo(ClientsCardComponent);

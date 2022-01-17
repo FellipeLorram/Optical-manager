@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import LastExamCard from '../../components/Card/ControlPannelCard/LastExamCard';
 import IsLoading from '../../components/Loader/IsLoading';
 import axios from '../../services/axios';
+import Button from '../../components/Buttons/Index';
+
 import {
-  AddButton,
   ContainerGrid,
   PageContainer,
   PageHeader,
@@ -30,7 +31,7 @@ export default function Exams() {
     >
       <IsLoading loading={loading} />
       <PageHeader>
-        <AddButton to="/new-exam">NOVO EXAME</AddButton>
+        <Button type="link" to="/new-exam">NOVO EXAME</Button>
       </PageHeader>
       <InLine />
       {data.length > 0 ? (

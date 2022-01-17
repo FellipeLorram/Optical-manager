@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CurrencyFormat from 'react-currency-format';
 
 import { Payment, PaymentsContainer } from './styled';
-import { Button } from '../../styles/GlobalStyles';
+import Button from '../../components/Buttons/Index';
 
 export default function Payments({
   payments,

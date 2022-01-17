@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AnimatePresence } from 'framer-motion';
-import { Button } from '../../styles/GlobalStyles';
+import Button from '../Buttons/Index';
 import { FooterContainer } from './styled';
 import history from '../../services/history';
 import axios from '../../services/axios';

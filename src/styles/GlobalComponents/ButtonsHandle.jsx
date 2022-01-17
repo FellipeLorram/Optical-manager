@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Container } from '../GlobalStyles';
+import { Container } from '../GlobalStyles';
+import Button from '../../components/Buttons/Index';
 
 export default function ButtonsHandle({
   id, handleAddSaveClick, setInputBlock, inputBlock,

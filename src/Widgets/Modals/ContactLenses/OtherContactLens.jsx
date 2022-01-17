@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Input from '../../../components/Input/Input';
-import { Button, OtherOptionContainer } from '../../../styles/GlobalStyles';
+import { OtherOptionContainer } from '../../../styles/GlobalStyles';
+import Button from '../../../components/Buttons/Index';
 
 export default function OtherContactLens({
   setLen, setOnScreen,

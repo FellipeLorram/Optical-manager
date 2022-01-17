@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { BodyContainer } from '../../../components/Modal/styled';
 import { ButtonContainer } from './styled';
-
-import { Button } from '../../../styles/GlobalStyles';
+import Button from '../../../components/Buttons/Index';
 
 export default function ButtonsControl({
   edit, saveClick, setEdit, handleDeleteClick,

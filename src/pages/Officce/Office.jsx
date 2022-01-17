@@ -3,7 +3,8 @@ import Sellers from '../../components/Svgs/OfficeButtons/Sellers';
 import Glasses from '../../components/Svgs/OfficeButtons/Glasses';
 import Lens from '../../components/Svgs/OfficeButtons/Lens';
 import Analytics from '../../components/Svgs/OfficeButtons/Analytics';
-import { ContainerGrid, LinkButtonSvg, PageContainer } from '../../styles/GlobalStyles';
+import { ContainerGrid, PageContainer } from '../../styles/GlobalStyles';
+import Button from '../../components/Buttons/Index';
 
 export default function Office() {
   const buttons = [
@@ -21,12 +22,12 @@ export default function Office() {
     >
       <ContainerGrid>
         {buttons.map((button) => (
-          <LinkButtonSvg key={button.to} to={button.to}>
+          <Button type="svg-link" key={button.to} to={button.to}>
             <span className="icon--container">
               {button.svg}
             </span>
             <span>{button.text}</span>
-          </LinkButtonSvg>
+          </Button>
         ))}
       </ContainerGrid>
     </PageContainer>

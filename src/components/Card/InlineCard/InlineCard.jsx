@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from './styled';
-import { Button, LinkButton } from '../../../styles/GlobalStyles';
+import Button from '../../Buttons/Index';
 import axios from '../../../services/axios';
 import history from '../../../services/history';
 
@@ -70,7 +70,7 @@ function InlineCardComponent({ data, position, setData }) {
         </span>
       </div>
       <div className="footer">
-        <LinkButton to={`/new-exam/${content.id}`}>Iniciar consulta</LinkButton>
+        <Button type="link" to={`/new-exam/${content.id}`}>Iniciar consulta</Button>
         <Button onClick={handleClickInlineRemove}>Remover da fila</Button>
       </div>
     </Container>

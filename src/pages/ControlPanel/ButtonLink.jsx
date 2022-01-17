@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
 import Article from '../../components/Svgs/Control Panel Buttons/Article';
 import Bag from '../../components/Svgs/Control Panel Buttons/Bag';
 import PersonAdd from '../../components/Svgs/Control Panel Buttons/PersonAdd';
 import RepairIcon from '../../components/Svgs/Control Panel Buttons/RepairIcon';
 import Printer from '../../components/Svgs/Control Panel Buttons/Printer';
-
-import { LinkButton } from './styled';
+import Button from '../../components/Buttons/Index';
 
 export default function ButtonLink() {
   const [widthScreen] = useState(window.innerWidth);
@@ -19,58 +17,63 @@ export default function ButtonLink() {
   return (
     <>
       {widthScreen < 768 && (
-        <LinkButton
+        <Button
+          type="svg-link"
           to="/officce"
         >
           <span className="icon--container">
             <Printer />
           </span>
           <span>ESCRITÓRIO</span>
-        </LinkButton>
+        </Button>
       )}
-      <LinkButton
+      <Button
         onMouseOver={() => setPersonAnimate(true)}
         onMouseLeave={() => setPersonAnimate(false)}
+        type="svg-link"
         to="/new-client"
       >
         <span className="icon--container">
           <PersonAdd animate={PersonAnimate} />
         </span>
         <span>NOVO CLIENTE</span>
-      </LinkButton>
+      </Button>
 
-      <LinkButton
+      <Button
         onMouseOver={() => setBagAnimate(true)}
         onMouseLeave={() => setBagAnimate(false)}
+        type="svg-link"
         to="/new-sell"
       >
         <span className="icon--container">
           <Bag animate={BagAnimate} />
         </span>
         <span>NOVA VENDA</span>
-      </LinkButton>
+      </Button>
 
-      <LinkButton
+      <Button
         onMouseOver={() => setArticleAnimate(true)}
         onMouseLeave={() => setArticleAnimate(false)}
+        type="svg-link"
         to="/new-exam"
       >
         <span className="icon--container">
           <Article animate={ArticleAnimate} />
         </span>
         <span>NOVO EXAME</span>
-      </LinkButton>
+      </Button>
 
-      <LinkButton
+      <Button
         onMouseOver={() => setRepairAnimate(true)}
         onMouseLeave={() => setRepairAnimate(false)}
+        type="svg-link"
         to="/new-repair"
       >
         <span className="icon--container">
           <RepairIcon animate={RepairAnimate} />
         </span>
         <span>NOVO CONCERTO</span>
-      </LinkButton>
+      </Button>
     </>
   );
 }
