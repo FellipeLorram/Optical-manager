@@ -9,6 +9,7 @@ function ButtonComponent({
   onMouseLeave,
   type,
   onClick,
+  cancel,
 }) {
   switch (type) {
     case 'link':
@@ -29,6 +30,13 @@ function ButtonComponent({
         </LinkButtonSvg>
       );
 
+    case 'Button':
+      return (
+        <NormalButton cancel={cancel} onClick={onClick}>
+          {children}
+        </NormalButton>
+      );
+
     default:
       return (
         <NormalButton onClick={onClick}>
@@ -42,15 +50,19 @@ ButtonComponent.defaultProps = {
   onMouseOver: () => 1,
   onMouseLeave: () => 1,
   onClick: () => 1,
+  to: '/',
+  type: 'Button',
+  cancel: false,
 };
 
 ButtonComponent.propTypes = {
   children: PropTypes.node.isRequired,
-  to: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  to: PropTypes.string,
+  type: PropTypes.string,
   onMouseOver: PropTypes.func,
   onMouseLeave: PropTypes.func,
   onClick: PropTypes.func,
+  cancel: PropTypes.bool,
 };
 
 const Button = memo(ButtonComponent);

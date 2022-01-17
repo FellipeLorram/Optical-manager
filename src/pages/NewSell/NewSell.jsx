@@ -39,6 +39,7 @@ export default function NewSell({ match }) {
         onScreen={deleteModalOnScreen}
         setOnScreen={setDeleteModalOnScreen}
         handleClick={handleDeleteClick}
+        deleteText="Você realmente deseja deletar essa venda? (Não contará mais no relatório)"
       />
       <PageHeader>
         <Arrow />

@@ -21,7 +21,7 @@ export default function SideBar() {
 
   useEffect(() => {
     if (widthScreen < 768) setMenuOpen(false);
-    if (level > 1) {
+    if (level >= 1) {
       setLinks(
         [
           { text: 'HOME', to: '/', icon: 'home' },

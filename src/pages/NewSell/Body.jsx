@@ -224,7 +224,7 @@ export default function Body({ id, sellid }) {
           valorLenContato,
           total,
           resta,
-          pago,
+          pago: Number(valorPago),
           entregue,
         });
         setSellId(responseId);
@@ -293,7 +293,7 @@ export default function Body({ id, sellid }) {
     valorLen,
     total,
     resta,
-    pago,
+    pago: Number(valorPago),
     sellDate: sellDate || FormatDate(Date.now()),
     esfOd,
     esfOe,
@@ -304,7 +304,7 @@ export default function Body({ id, sellid }) {
     adicao,
     dnpOd,
     dnpOe,
-    sellOs: sellOs || randomOs,
+    sellOs: sellOs.toString() || randomOs.toString(),
   };
 
   return (

@@ -10,26 +10,21 @@ import Button from '../../../components/Buttons/Index';
 import Pdf from '../../../components/GeneratePdf/Index';
 
 export default function Body({
-  handlePrintOutClick,
   PdfContent,
 }) {
   const [labSwitch, setLabSwitch] = useState(true);
   const [clientSwitch, setClientSwitch] = useState(true);
-  const [storeSwitch, setStoreSwitch] = useState(false);
+  // const [storeSwitch, setStoreSwitch] = useState(false);
 
   const switchs = [
     { label: 'VIA DO LABORATÓRIO', isOn: labSwitch, setIsOn: setLabSwitch },
     { label: 'VIA DO CLIENTE', isOn: clientSwitch, setIsOn: setClientSwitch },
-    { label: 'VIA DA LOJA', isOn: storeSwitch, setIsOn: setStoreSwitch },
   ];
 
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
-  const handleClick = () => {
-    handlePrintOutClick(clientSwitch, storeSwitch, labSwitch);
-  };
 
   return (
     <BodyContainer>
@@ -38,7 +33,6 @@ export default function Body({
           ref={componentRef}
           PdfContent={PdfContent}
           clientSwitch={clientSwitch}
-          storeSwitch={storeSwitch}
           labSwitch={labSwitch}
         />
       </div>
@@ -54,7 +48,6 @@ export default function Body({
           <Paper switchs={{
             labSwitch,
             clientSwitch,
-            storeSwitch,
           }}
           />
         </div>
@@ -70,6 +63,5 @@ export default function Body({
   );
 }
 Body.propTypes = {
-  handlePrintOutClick: PropTypes.func.isRequired,
   PdfContent: PropTypes.object.isRequired,
 };

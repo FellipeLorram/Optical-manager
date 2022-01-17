@@ -41,6 +41,7 @@ export default function NewExam({ match }) {
         handleClick={handleDeleteClick}
         onScreen={deleteModalOnScreen}
         setOnScreen={setDeleteModalOnScreen}
+        deleteText="Você realmente deseja excluir esse exame? (Não constará mais no relatório)"
       />
       <LastExam show={showLastExam} setShow={setShowLastExam} id={id} />
       <PageHeader>
