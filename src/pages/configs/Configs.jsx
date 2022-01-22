@@ -15,8 +15,7 @@ export default function Configs() {
     { text: 'NOTIFICAÇÔES', svg: Notifications(), to: '/config/notifications' },
   ];
 
-  const handleLogoutClick = (e) => {
-    e.preventDefault();
+  const handleLogoutClick = () => {
     dispatch(actions.loginFailure());
   };
 
@@ -35,7 +34,7 @@ export default function Configs() {
             <span>{button.text}</span>
           </Button>
         ))}
-        <Button type="svg-link" onClick={handleLogoutClick} to="/logout">
+        <Button type="svg-button" onClick={handleLogoutClick}>
           <span className="icon--container">
             <Logout />
           </span>

@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { LinkButton, LinkButtonSvg, NormalButton } from './styled';
+import {
+  ButtonSvg, LinkButton, LinkButtonSvg, NormalButton,
+} from './styled';
 
 function ButtonComponent({
   children,
@@ -35,6 +37,13 @@ function ButtonComponent({
         <NormalButton cancel={cancel} onClick={onClick}>
           {children}
         </NormalButton>
+      );
+
+    case 'svg-button':
+      return (
+        <ButtonSvg cancel={cancel} onClick={onClick}>
+          {children}
+        </ButtonSvg>
       );
 
     default:
