@@ -32,5 +32,6 @@ module.exports = {
     'no-unused-vars': 0,
     'react/forbid-prop-types': 0,
     'no-underscore-dangle': 0,
+    'linebreak-style': 0,
   },
 };

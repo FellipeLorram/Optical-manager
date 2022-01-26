@@ -17,7 +17,7 @@ import ButtonsControl from './ButtonsControl';
 import axios from '../../../services/axios';
 
 export default function Body({
-  total, remains, setOnScreen, clientId, sellId, dataPayment,
+  total, remains, setOnScreen, clientId, sellId, dataPayment, setPayments,
 }) {
   const seller = useSelector((state) => state.auth.currentUserName);
   const [paymentId, setPaymentId] = useState('');
@@ -82,8 +82,17 @@ export default function Body({
             value: paymentValue,
             receiveBy: seller,
           });
+          setPayments((paymentArr) => {
+            const newArr = paymentArr;
+            newArr.push({
+              type: paymentMethod,
+              value: paymentValue,
+              receiveBy: seller,
+              paidIn: Date.now(),
+            });
+            return newArr;
+          });
         }
-        window.location.reload(false);
         setOnScreen(false);
       } catch (error) {
         setIsValidPaymentValue(false);
@@ -151,6 +160,7 @@ Body.propTypes = {
   dataPayment: PropTypes.object,
   remains: PropTypes.number,
   total: PropTypes.number,
+  setPayments: PropTypes.func.isRequired,
   setOnScreen: PropTypes.func,
   clientId: PropTypes.string,
   sellId: PropTypes.string,

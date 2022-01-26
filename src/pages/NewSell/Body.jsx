@@ -180,6 +180,26 @@ export default function Body({ id, sellid }) {
     setResta(Number(valorDaCompra) - Number(paidValue));
   }, [payments, valorDaCompra]);
 
+  const PaymentValidate = () => {
+    let valid = true;
+    if (armacao && !valorArm) {
+      setIsValidValueArm(false);
+      valid = false;
+    }
+    if (lente && !valorLen) {
+      setIsValidValueLen(false);
+      valid = false;
+    }
+    if (lenteContato && !valorLenContato) {
+      setIsValidValueLenContato(false);
+      valid = false;
+    }
+    if (!total) {
+      valid = false;
+    }
+    return valid;
+  };
+
   const handleLastExamClick = () => {
     if (!lastExamData) return;
 
@@ -238,6 +258,7 @@ export default function Body({ id, sellid }) {
   };
 
   const handleAddPaymentClick = () => {
+    if (!PaymentValidate()) return;
     async function request() {
       try {
         if (!sellId) {
