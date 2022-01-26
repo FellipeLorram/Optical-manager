@@ -14,7 +14,7 @@ const PdfHeader = ({
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '100%',
-        paddingBottom: '30px',
+        paddingBottom: '20px',
       }}
     >
       <span
@@ -30,7 +30,7 @@ const PdfHeader = ({
           display: 'flex',
           justifyContent: 'flex-end',
           alignItems: 'flex-end',
-          flexDirection: 'column',
+          flexDirection: 'row',
           gap: '5px',
         }}
       >

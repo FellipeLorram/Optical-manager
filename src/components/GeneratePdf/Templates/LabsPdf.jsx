@@ -25,7 +25,7 @@ const LabsPaper = ({ PdfContent }) => {
           alignItems: 'center',
           justifyContent: 'center',
           flexDirection: 'row',
-          gap: '10px',
+          gap: '5px',
         }}
       >
 
@@ -47,12 +47,16 @@ const LabsPaper = ({ PdfContent }) => {
             <span style={{ width: '100%', padding: '10px', border: '1px solid #ccc' }}>{PdfContent.alturaOd}</span>
           </div>
           <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
-            <span style={{ width: '100%', padding: '10px', border: '1px solid #ccc' }}>OD</span>
+            <span style={{ width: '100%', padding: '10px', border: '1px solid #ccc' }}>OE</span>
             <span style={{ width: '100%', padding: '10px', border: '1px solid #ccc' }}>{PdfContent.esfOe}</span>
             <span style={{ width: '100%', padding: '10px', border: '1px solid #ccc' }}>{PdfContent.cilOe}</span>
             <span style={{ width: '100%', padding: '10px', border: '1px solid #ccc' }}>{PdfContent.eixoOe}</span>
             <span style={{ width: '100%', padding: '10px', border: '1px solid #ccc' }}>{PdfContent.dnpOe}</span>
             <span style={{ width: '100%', padding: '10px', border: '1px solid #ccc' }}>{PdfContent.alturaOe}</span>
+          </div>
+          <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
+            <span style={{ width: '25%', padding: '10px', border: '1px solid #ccc' }}>ADD</span>
+            <span style={{ width: '75%', padding: '10px', border: '1px solid #ccc' }}>PdfContent.adicao</span>
           </div>
         </div>
         <div style={{
