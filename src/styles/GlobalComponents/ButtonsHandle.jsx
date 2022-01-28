@@ -4,7 +4,11 @@ import { Container } from '../GlobalStyles';
 import Button from '../../components/Buttons/Index';
 
 export default function ButtonsHandle({
-  id, handleAddSaveClick, setInputBlock, inputBlock,
+  id,
+  handleAddSaveClick,
+  setInputBlock,
+  inputBlock,
+  labelTexts,
 }) {
   return (
     <Container>
@@ -21,7 +25,7 @@ export default function ButtonsHandle({
             )}
           </>
         ) : (
-          <Button onClick={() => handleAddSaveClick(false)}>FINALIZAR</Button>
+          <Button onClick={() => handleAddSaveClick(false)}>{labelTexts.saveLabel || 'FINALIZAR'}</Button>
         )}
       </div>
     </Container>
@@ -31,6 +35,7 @@ export default function ButtonsHandle({
 ButtonsHandle.defaultProps = {
   id: '',
   inputBlock: false,
+  labelTexts: {},
 };
 
 ButtonsHandle.propTypes = {
@@ -38,4 +43,5 @@ ButtonsHandle.propTypes = {
   setInputBlock: PropTypes.func.isRequired,
   id: PropTypes.string,
   inputBlock: PropTypes.bool,
+  labelTexts: PropTypes.object,
 };

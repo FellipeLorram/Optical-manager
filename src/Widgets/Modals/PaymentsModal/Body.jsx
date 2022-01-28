@@ -82,18 +82,9 @@ export default function Body({
             value: paymentValue,
             receiveBy: seller,
           });
-          setPayments((paymentArr) => {
-            const newArr = paymentArr;
-            newArr.push({
-              type: paymentMethod,
-              value: paymentValue,
-              receiveBy: seller,
-              paidIn: Date.now(),
-            });
-            return newArr;
-          });
         }
         setOnScreen(false);
+        window.location.reload(false);
       } catch (error) {
         setIsValidPaymentValue(false);
       }

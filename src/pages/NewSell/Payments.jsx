@@ -13,6 +13,7 @@ export default function Payments({
   handleAddPaymentClick,
   setDataPayment,
   setOnScreen,
+  sellId,
 }) {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
   const FormatDate = (date) => new Date(date).toLocaleDateString('pt-BR', options);
@@ -78,7 +79,7 @@ export default function Payments({
           {'Resta: '}
           <CurrencyFormat value={remains} displayType="text" thousandSeparator prefix="R$" />
         </span>
-        <Button onClick={handleAddPaymentClick}>ADICIONAR PAGAMENTO</Button>
+        {sellId && <Button onClick={handleAddPaymentClick}>ADICIONAR PAGAMENTO</Button>}
       </div>
     </PaymentsContainer>
   );
@@ -88,9 +89,11 @@ Payments.defaultProps = {
   remains: 0,
   purchaseAmount: 0,
   amountPaid: 0,
+  sellId: '',
 };
 
 Payments.propTypes = {
+  sellId: PropTypes.string,
   handleAddPaymentClick: PropTypes.func.isRequired,
   payments: PropTypes.array.isRequired,
   remains: PropTypes.number,

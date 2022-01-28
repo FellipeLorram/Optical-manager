@@ -140,7 +140,7 @@ export const NormalButton = styled(motion.button)`
   text-decoration: none;
   text-align: center;
   font-size: .8rem;
-
+  text-transform:uppercase;
 
   &:hover{
     filter: brightness(90%);

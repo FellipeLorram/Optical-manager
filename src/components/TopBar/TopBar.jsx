@@ -13,7 +13,6 @@ export default function TopBar() {
     if (hour >= 0 && hour <= 11) setMessage('Bom dia, ');
     else if (hour >= 12 && hour < 18) setMessage('Boa tarde, ');
     else setMessage('Boa noite, ');
-    console.log(hour);
   }, []);
 
   return (

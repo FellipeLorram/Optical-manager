@@ -50,7 +50,7 @@ Input.defaultProps = {
 
 Input.propTypes = {
   label: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   type: PropTypes.string.isRequired,
   valid: PropTypes.bool.isRequired,
   inputBlock: PropTypes.bool,

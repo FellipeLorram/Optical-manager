@@ -248,7 +248,8 @@ export default function Body({ id, sellid }) {
           entregue,
         });
         setSellId(responseId);
-        history.push(`/edit-sell/${id}/${sellId}`);
+        history.push(`/edit-sell/${id}/${responseId}`);
+        setModalAddPaymentsOnScreen(true);
       } catch (error) {
         return 1;
       }
@@ -258,49 +259,7 @@ export default function Body({ id, sellid }) {
   };
 
   const handleAddPaymentClick = () => {
-    if (!PaymentValidate()) return;
-    async function request() {
-      try {
-        if (!sellId) {
-          const responseId = await save(id, {
-            esfOd: `${EsfOdSign}${esfOd}`,
-            cilOd: `-${cilOd}`,
-            eixoOd,
-
-            esfOe: `${EsfOeSign}${esfOe}`,
-            cilOe: `-${cilOe}`,
-            eixoOe,
-
-            adicao,
-
-            dnpOd,
-            alturaOd,
-            dnpOe,
-            alturaOe,
-
-            armacao,
-            valorArm,
-            lente,
-            valorLen,
-            lenteContato,
-            valorLenContato,
-            total,
-            resta,
-            pago,
-            entregue,
-          });
-          setSellId(responseId);
-        }
-        setDataPayment({
-          data: false,
-        });
-        setModalAddPaymentsOnScreen(true);
-      } catch (error) {
-        return 1;
-      }
-      return 0;
-    }
-    request();
+    setModalAddPaymentsOnScreen(true);
   };
 
   const PdfContent = {
@@ -329,163 +288,170 @@ export default function Body({ id, sellid }) {
   };
 
   return (
-    <FormBodyContainer>
-      <IsLoading loading={loading} />
-      <Frames
-        setValueFrame={setValorArm}
-        setFrame={setArmacao}
-        onScreen={ModalFramesOnScreen}
-        setOnScreen={setModalFramesOnScreen}
-      />
-      <Lens
-        setValueLen={setValorLen}
-        setLen={setLente}
-        onScreen={ModalLensOnScreen}
-        setOnScreen={setModalLensOnScreen}
-      />
-      <ContactLenses
-        setLenContactLenses={setLenteContato}
-        onScreen={ModalContactLensOnScreen}
-        setOnScreen={setModalContactLensOnScreen}
-      />
-      <PaymentModal
-        onScreen={ModalAddPaymentsOnScreen}
-        setOnScreen={setModalAddPaymentsOnScreen}
-        total={Number(total)}
-        resta={Number(resta)}
-        clientId={id}
-        sellId={sellId}
-        setPayments={setPayments}
-        dataPayment={dataPayment}
-      />
-      <PdfModal
-        onScreen={ModalPdfOnScreen}
-        setOnScreen={setModalPdfOnScreen}
-        PdfContent={PdfContent}
-      />
-      {sellDate && (
-        <>
-          <div className="title">
-            {`Venda dia: ${sellDate}`}
-          </div>
-          <div className="title">
-            {`OS: ${sellOs}`}
-          </div>
-        </>
-      )}
-      <div className="title">
-        EXAME
-      </div>
-      <div className="sub-title">
-        OLHO DIREITO
-      </div>
-      <div className="input--container">
-        <InputSign inputBlock={inputBlock} sign={EsfOdSign} setSign={setEsfOdSign} label="ESFÉRICO" valid={isValidesfOd} setValidText={setIsValidEsfOd} setText={setEsfOd} text={esfOd} type="number" />
-        <InputSign inputBlock={inputBlock} cil sign="-" label="CILINDRICO" valid={isValidCilOd} setValidText={setIsValidCilOd} setText={setCilOd} text={cilOd} type="number" />
-        <Input inputBlock={inputBlock} label="EIXO" valid={isValidEixoOd} setValidText={setIsValidEixoOd} setText={setEixoOd} text={eixoOd} type="number" />
-      </div>
-      <div className="sub-title">
-        OLHO ESQUERDO
-      </div>
-      <div className="input--container">
-        <InputSign inputBlock={inputBlock} sign={EsfOeSign} setSign={setEsfOeSign} label="ESFÉRICO" valid={isValidesfOe} setValidText={setIsValidEsfOe} setText={setEsfOe} text={esfOe} type="number" />
-        <InputSign inputBlock={inputBlock} cil sign="-" label="CILINDRICO" valid={isValidCilOe} setValidText={setIsValidCilOe} setText={setCilOe} text={cilOe} type="number" />
-        <Input inputBlock={inputBlock} label="EIXO" valid={isValidEixoOe} setValidText={setIsValidEixoOe} setText={setEixoOe} text={eixoOe} type="number" />
-      </div>
-      <div className="input--container">
-        <Input inputBlock={inputBlock} label="ADIÇÃO" valid={isValidAdicao} setValidText={setIsValidAdicao} setText={setAdicao} text={adicao} type="number" />
-      </div>
-      {lastExamData && !sellId && (
-        <div className="input--container--start">
-          <Button onClick={handleLastExamClick}>UTILIZAR DADOS DA ULTIMA CONSULTA</Button>
+    <>
+      <FormBodyContainer>
+        <IsLoading loading={loading} />
+        <Frames
+          setValueFrame={setValorArm}
+          setFrame={setArmacao}
+          onScreen={ModalFramesOnScreen}
+          setOnScreen={setModalFramesOnScreen}
+        />
+        <Lens
+          setValueLen={setValorLen}
+          setLen={setLente}
+          onScreen={ModalLensOnScreen}
+          setOnScreen={setModalLensOnScreen}
+        />
+        <ContactLenses
+          setLenContactLenses={setLenteContato}
+          onScreen={ModalContactLensOnScreen}
+          setOnScreen={setModalContactLensOnScreen}
+        />
+        <PaymentModal
+          onScreen={ModalAddPaymentsOnScreen}
+          setOnScreen={setModalAddPaymentsOnScreen}
+          total={Number(total)}
+          resta={Number(resta)}
+          clientId={id}
+          sellId={sellId}
+          setPayments={setPayments}
+          dataPayment={dataPayment}
+        />
+        <PdfModal
+          onScreen={ModalPdfOnScreen}
+          setOnScreen={setModalPdfOnScreen}
+          PdfContent={PdfContent}
+        />
+        {sellDate && (
+          <>
+            <div className="title">
+              {`Venda dia: ${sellDate}`}
+            </div>
+            <div className="title">
+              {`OS: ${sellOs}`}
+            </div>
+          </>
+        )}
+        <div className="title">
+          EXAME
         </div>
-      )}
-      <div className="title">
-        MEDIDAS
-      </div>
-      <div className="sub-title">
-        OLHO DIREITO
-      </div>
-      <div className="input--container">
-        <Input inputBlock={inputBlock} label="DNP" valid setText={setDnpOd} text={dnpOd} type="number" />
-        <Input inputBlock={inputBlock} label="ALTURA" valid setText={setAlturaOd} text={alturaOd} type="number" />
-      </div>
-      <div className="sub-title">
-        OLHO ESQUERDO
-      </div>
-      <div className="input--container">
-        <Input inputBlock={inputBlock} label="DNP" valid setText={setDnpOe} text={dnpOe} type="number" />
-        <Input inputBlock={inputBlock} label="ALTURA" valid setText={setAlturaOe} text={alturaOe} type="number" />
-      </div>
-      <div className="title">
-        COMPRA
-      </div>
-      <div className="sub-title">
-        ARMAÇÃO
-      </div>
-      <div className="input--container">
-        <SelectModal
-          block={inputBlock}
-          onClick={() => !inputBlock && setModalFramesOnScreen(true)}
-        >
-          <span>ARMAÇÃO:</span>
-          <span className="frame">{armacao}</span>
-        </SelectModal>
-        <Input inputBlock={inputBlock} label="VALOR" valid={isValidValueArm} setValidText={setIsValidValueArm} setText={setValorArm} text={valorArm} type="number" />
-      </div>
-      <div className="sub-title">
-        LENTE
-      </div>
-      <div className="input--container">
-        <SelectModal
-          block={inputBlock}
-          onClick={() => !inputBlock && setModalLensOnScreen(true)}
-        >
-          <span>LENTE:</span>
-          <span className="frame">{lente}</span>
-        </SelectModal>
-        <Input inputBlock={inputBlock} label="VALOR" valid={isValidValueLen} setValidText={setIsValidValueLen} setText={setValorLen} text={valorLen} type="number" />
-      </div>
-      <div className="sub-title">
-        LENTE DE CONTATO
-      </div>
-      <div className="input--container">
-        <SelectModal
-          block={inputBlock}
-          onClick={() => !inputBlock && setModalContactLensOnScreen(true)}
-        >
-          <span>LENTE DE CONTATO:</span>
-          <span className="frame">{lenteContato}</span>
-        </SelectModal>
-        <Input inputBlock={inputBlock} label="VALOR" valid={isValidValueLenContato} setValidText={setIsValidValueLenContato} setText={setValorLenContato} text={valorLenContato} type="number" />
-      </div>
-      <div className="title">
-        {'TOTAL:  '}
-        <CurrencyFormat value={total} displayType="text" thousandSeparator prefix="R$" />
-      </div>
-      <div className="input--container">
-        <Input inputBlock={inputBlock} label="DESCONTO" valid setText={setDesconto} text={desconto} type="number" />
-        <Input inputBlock={inputBlock} label="VALOR DA COMPRA" valid setText={setValorDaCompra} text={valorDaCompra} type="number" />
-      </div>
-      <Payments
-        setDataPayment={setDataPayment}
-        payments={payments}
-        remains={Number(resta)}
-        purchaseAmount={Number(valorDaCompra)}
-        amountPaid={Number(valorPago)}
-        handleAddPaymentClick={handleAddPaymentClick}
-        setOnScreen={setModalAddPaymentsOnScreen}
-      />
-      <div className="input--container--start">
-        <Button onClick={() => setModalPdfOnScreen(true)}>GERAR PDF</Button>
-      </div>
-      <ButtonHandle
-        inputBlock={inputBlock}
-        setInputBlock={setInputBlock}
-        id={sellId}
-        handleAddSaveClick={handleAddSaveClick}
-      />
-    </FormBodyContainer>
+        <div className="sub-title">
+          OLHO DIREITO
+        </div>
+        <div className="input--container">
+          <InputSign inputBlock={inputBlock} sign={EsfOdSign} setSign={setEsfOdSign} label="ESFÉRICO" valid={isValidesfOd} setValidText={setIsValidEsfOd} setText={setEsfOd} text={esfOd} type="number" />
+          <InputSign inputBlock={inputBlock} cil sign="-" label="CILINDRICO" valid={isValidCilOd} setValidText={setIsValidCilOd} setText={setCilOd} text={cilOd} type="number" />
+          <Input inputBlock={inputBlock} label="EIXO" valid={isValidEixoOd} setValidText={setIsValidEixoOd} setText={setEixoOd} text={eixoOd} type="number" />
+        </div>
+        <div className="sub-title">
+          OLHO ESQUERDO
+        </div>
+        <div className="input--container">
+          <InputSign inputBlock={inputBlock} sign={EsfOeSign} setSign={setEsfOeSign} label="ESFÉRICO" valid={isValidesfOe} setValidText={setIsValidEsfOe} setText={setEsfOe} text={esfOe} type="number" />
+          <InputSign inputBlock={inputBlock} cil sign="-" label="CILINDRICO" valid={isValidCilOe} setValidText={setIsValidCilOe} setText={setCilOe} text={cilOe} type="number" />
+          <Input inputBlock={inputBlock} label="EIXO" valid={isValidEixoOe} setValidText={setIsValidEixoOe} setText={setEixoOe} text={eixoOe} type="number" />
+        </div>
+        <div className="input--container">
+          <Input inputBlock={inputBlock} label="ADIÇÃO" valid={isValidAdicao} setValidText={setIsValidAdicao} setText={setAdicao} text={adicao} type="number" />
+        </div>
+        {lastExamData && !sellId && (
+          <div className="input--container--start">
+            <Button onClick={handleLastExamClick}>UTILIZAR DADOS DA ULTIMA CONSULTA</Button>
+          </div>
+        )}
+        <div className="title">
+          MEDIDAS
+        </div>
+        <div className="sub-title">
+          OLHO DIREITO
+        </div>
+        <div className="input--container">
+          <Input inputBlock={inputBlock} label="DNP" valid setText={setDnpOd} text={dnpOd} type="number" />
+          <Input inputBlock={inputBlock} label="ALTURA" valid setText={setAlturaOd} text={alturaOd} type="number" />
+        </div>
+        <div className="sub-title">
+          OLHO ESQUERDO
+        </div>
+        <div className="input--container">
+          <Input inputBlock={inputBlock} label="DNP" valid setText={setDnpOe} text={dnpOe} type="number" />
+          <Input inputBlock={inputBlock} label="ALTURA" valid setText={setAlturaOe} text={alturaOe} type="number" />
+        </div>
+        <div className="title">
+          COMPRA
+        </div>
+        <div className="sub-title">
+          ARMAÇÃO
+        </div>
+        <div className="input--container">
+          <SelectModal
+            block={inputBlock}
+            onClick={() => !inputBlock && setModalFramesOnScreen(true)}
+          >
+            <span>ARMAÇÃO:</span>
+            <span className="frame">{armacao}</span>
+          </SelectModal>
+          <Input inputBlock={inputBlock} label="VALOR" valid={isValidValueArm} setValidText={setIsValidValueArm} setText={setValorArm} text={valorArm} type="number" />
+        </div>
+        <div className="sub-title">
+          LENTE
+        </div>
+        <div className="input--container">
+          <SelectModal
+            block={inputBlock}
+            onClick={() => !inputBlock && setModalLensOnScreen(true)}
+          >
+            <span>LENTE:</span>
+            <span className="frame">{lente}</span>
+          </SelectModal>
+          <Input inputBlock={inputBlock} label="VALOR" valid={isValidValueLen} setValidText={setIsValidValueLen} setText={setValorLen} text={valorLen} type="number" />
+        </div>
+        <div className="sub-title">
+          LENTE DE CONTATO
+        </div>
+        <div className="input--container">
+          <SelectModal
+            block={inputBlock}
+            onClick={() => !inputBlock && setModalContactLensOnScreen(true)}
+          >
+            <span>LENTE DE CONTATO:</span>
+            <span className="frame">{lenteContato}</span>
+          </SelectModal>
+          <Input inputBlock={inputBlock} label="VALOR" valid={isValidValueLenContato} setValidText={setIsValidValueLenContato} setText={setValorLenContato} text={valorLenContato} type="number" />
+        </div>
+        <div className="title">
+          {'TOTAL:  '}
+          <CurrencyFormat value={total} displayType="text" thousandSeparator prefix="R$" />
+        </div>
+        <div className="input--container">
+          <Input inputBlock={inputBlock} label="DESCONTO" valid setText={setDesconto} text={desconto} type="number" />
+          <Input inputBlock={inputBlock} label="VALOR DA COMPRA" valid setText={setValorDaCompra} text={valorDaCompra} type="number" />
+        </div>
+
+        <div className="input--container--start">
+          <Button onClick={() => setModalPdfOnScreen(true)}>GERAR PDF</Button>
+        </div>
+        <ButtonHandle
+          labelTexts={{ saveLabel: 'Finalizar e adicionar pagamento' }}
+          inputBlock={inputBlock}
+          setInputBlock={setInputBlock}
+          id={sellId}
+          handleAddSaveClick={handleAddSaveClick}
+        />
+      </FormBodyContainer>
+      <FormBodyContainer>
+        <Payments
+          sellId={sellId}
+          setDataPayment={setDataPayment}
+          payments={payments}
+          remains={Number(resta)}
+          purchaseAmount={Number(valorDaCompra)}
+          amountPaid={Number(valorPago)}
+          handleAddPaymentClick={handleAddPaymentClick}
+          setOnScreen={setModalAddPaymentsOnScreen}
+        />
+      </FormBodyContainer>
+    </>
   );
 }
 
