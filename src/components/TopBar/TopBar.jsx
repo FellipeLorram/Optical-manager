@@ -9,10 +9,11 @@ export default function TopBar() {
   const userLogoName = useSelector((state) => state.auth.currentUserName);
 
   useEffect(() => {
-    const date = new Date().getHours();
-    if (date >= 0 && date < 11) setMessage('Bom dia, ');
-    else if (date >= 12 && date < 18) setMessage('Boa tarde, ');
+    const hour = new Date().getHours();
+    if (hour >= 0 && hour <= 11) setMessage('Bom dia, ');
+    else if (hour >= 12 && hour < 18) setMessage('Boa tarde, ');
     else setMessage('Boa noite, ');
+    console.log(hour);
   }, []);
 
   return (
